@@ -119,12 +119,12 @@ public class Hra extends JPanel {
         for (int i = 0; i < superJidlo.size(); i++) {
             superJidlo.get(i).vykresleniSuperJidla(g);
         }
-        /**
+
         ArrayList<MistaZmenySmeru> mistaZmenySmeru = engine.getMistaZmenySmeru();
         for (int i = 0; i < mistaZmenySmeru.size() ; i++) {
             mistaZmenySmeru.get(i).vykresliSe(g);
         }
-         */
+
     }
 
     private void vypisScore(Graphics g) {

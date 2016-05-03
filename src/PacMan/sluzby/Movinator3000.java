@@ -82,12 +82,12 @@ public class Movinator3000 {
             if(kontrolaKolizesMistem(budouci[0], budouci[1], uroven.getPotvurky().get(i))){
                 nahodnySmer(potvurka);
             }
-            if(kontrolaSnedeniJidla(budouci[0] - 1, budouci[1] - 1, uroven.getPotvurky().get(i))){
+            /*if(kontrolaSnedeniJidla(budouci[0] - 1, budouci[1] - 1, uroven.getPotvurky().get(i))){
                 scorePotvurek++;
-            }
-            if(kontrolaKolizeSuperJidla(budouci[0], budouci[1], uroven.getPotvurky().get(i))){
+            }*/
+            /*if(kontrolaKolizeSuperJidla(budouci[0], budouci[1], uroven.getPotvurky().get(i))){
                 scorePotvurek = scorePotvurek + 30;
-            }
+            }*/
         }
     }
 
@@ -96,7 +96,7 @@ public class Movinator3000 {
         boolean kontrolaKolizeVOkne = kontrolaKolizesOkrajemaHry(budouci[0], budouci[1], postavicka);
         boolean kontrolaKolizePrekazky = kontrolaKolizeSPrekazkama(budouci[0], budouci[1], postavicka);
         //boolean kontrolaKOlizeSMistem = kontrolaKolizesMistem(budouci[0], budouci[1], postavicka);
-        kontrolaSnedeniJidla(budouci[0], budouci[1], postavicka);
+        //kontrolaSnedeniJidla(budouci[0], budouci[1], postavicka);
         return !kontrolaKolizeVOkne && !kontrolaKolizePrekazky; //kontrolaKOlizeSMistem;
     }
 
@@ -124,7 +124,7 @@ public class Movinator3000 {
             return true;
         } else if ((y >= maxVyska - postavicka.getVelikost())) {
             return true;
-        } else if (x < 9 || y < 19) {
+        } else if (x < 1 || y < 19) {
             return true;
         }
         return false;
