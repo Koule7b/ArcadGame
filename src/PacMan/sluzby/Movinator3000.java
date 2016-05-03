@@ -54,6 +54,9 @@ public class Movinator3000 {
                 scoreHrace++;
                 //engine.setScoreHrace(scoreHrace);
             }
+            //Nekontroluje kolizi hráče s potvůrkou, když hráč stojí.
+            //Povoluje chety, když hráč stojí nenii sněden.
+            //;-)
             if(kontrolaKolizeSPotvurkama(budouci[0], budouci[1], uroven.getHrac())){
                 zivoty--;
                 uroven.getHrac().setX(125);
@@ -82,12 +85,12 @@ public class Movinator3000 {
             if(kontrolaKolizesMistem(budouci[0], budouci[1], uroven.getPotvurky().get(i))){
                 nahodnySmer(potvurka);
             }
-            /*if(kontrolaSnedeniJidla(budouci[0] - 1, budouci[1] - 1, uroven.getPotvurky().get(i))){
+            if(kontrolaSnedeniJidla(budouci[0] - 1, budouci[1] - 1, uroven.getPotvurky().get(i))){
                 scorePotvurek++;
-            }*/
-            /*if(kontrolaKolizeSuperJidla(budouci[0], budouci[1], uroven.getPotvurky().get(i))){
+            }
+            if(kontrolaKolizeSuperJidla(budouci[0], budouci[1], uroven.getPotvurky().get(i))){
                 scorePotvurek = scorePotvurek + 30;
-            }*/
+            }
         }
     }
 

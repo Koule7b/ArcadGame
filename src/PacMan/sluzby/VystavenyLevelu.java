@@ -14,8 +14,9 @@ public class VystavenyLevelu {
     private ArrayList<Uroven> sezanam = new ArrayList<>();
 
     public VystavenyLevelu() {
+        vytvorUroven1();
+        vytvorUroven2();
         vytvorUroven3();
-        //vytvorUroven2();
     }
 
     public Uroven get(int uroven) {
@@ -113,11 +114,9 @@ public class VystavenyLevelu {
         lvl.addPrekazka(30, 330 + pd, 180, 30);
         lvl.addPrekazka(30, 390 + pd, 30, 60);
         lvl.addPrekazka(90, 180 + pd, 30, 30);
-
         // lvl.addPrekazka(90,210 + pd,120,30);
         lvl.addPrekazka(90, 210 + pd, 30, 30);
         lvl.addPrekazka(150, 210 + pd, 60, 30);
-
         lvl.addPrekazka(90, 390 + pd, 120, 30);
         lvl.addPrekazka(120, 90 + pd, 60, 30);
         lvl.addPrekazka(120, 360 + pd, 30, 30);
@@ -151,7 +150,6 @@ public class VystavenyLevelu {
         lvl.addMistoZnemySmeru(30 + pp, 180 + pd, 1, 1);
         lvl.addMistoZnemySmeru(0 + pp, 300 + pd, 1, 1);
         lvl.addMistoZnemySmeru(0 + pp, 360 + pd, 1, 1);
-
         lvl.addMistoZnemySmeru(60 + pp, 0 + pd, 1, 1);
         lvl.addMistoZnemySmeru(60 + pp, 240 + pd, 1, 1);
         lvl.addMistoZnemySmeru(60 + pp, 360 + pd, 1, 1);
@@ -177,7 +175,7 @@ public class VystavenyLevelu {
 
 
         sezanam.add(lvl);
-        sezanam.set(0, lvl);
+        sezanam.set(2, lvl);
 
     }
 
