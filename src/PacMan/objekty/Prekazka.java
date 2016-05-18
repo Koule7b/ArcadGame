@@ -1,11 +1,12 @@
 package PacMan.objekty;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Created by Admin on 19.4.2016.
  */
-public class Prekazka {
+public class Prekazka implements Serializable{
     private int x;
     private int y;
     private  int sirka;

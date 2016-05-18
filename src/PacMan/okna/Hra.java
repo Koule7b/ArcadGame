@@ -7,8 +7,6 @@ import PacMan.objekty.jidlo.Svaca;
 import PacMan.objekty.mistaZmenySmeru.MistaZmenySmeru;
 import PacMan.objekty.postavicky.*;
 import PacMan.Engine;
-import PacMan.urovne.Uroven;
-import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.awt.*;
 import java.awt.Graphics;
@@ -28,6 +26,7 @@ public class Hra extends JPanel {
     private Engine engine;
     private Timer casovac;
     private Image gameoverP = new ImageIcon("C:\\Users\\Admin\\IdeaProjects\\Hra\\src\\Pac - Man.jpg").getImage();
+    private int casSilokoule = 0;
 
 
     public Hra() {
@@ -39,12 +38,7 @@ public class Hra extends JPanel {
         this.setPreferredSize(new Dimension(sirka, vyska));
         setBackground(Color.RED);
         this.engine = new Engine(sirka, vyska);
-        if (engine.getUroven() == 0) {
-            this.setBackground(Color.RED);
-        }
-        if (engine.getUroven() == 1) {
-            this.setBackground(Color.DARK_GRAY);
-        }
+        this.setBackground(Color.DARK_GRAY);
 
 
         addKeyListener(new KeyAdapter() {
@@ -78,25 +72,27 @@ public class Hra extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        pocetZivotu(g);
-        vypisScore(g);
-        //g.drawString("Štěpán ", 5, 15);
-        if (engine.getSvaca().size() == 0) {
-            if(engine.hracVyhral()) {
-                vypisVyhru(g);
-                casovac.stop();
-                return;
-            }else{
+        if (engine.KonecHry() && !engine.nactiDalsiUroven()) {
+             if(engine.HracVyhral()) {
+             vypisVyhru(g);
+             casovac.stop();
+             return;
+             }else{
+             vypsaniProhry(g);
+             casovac.stop();
+             }
+        }else {
+            pocetZivotu(g);
+            vypisScore(g);
+            if (engine.getZivotyHrace() <= 0) {
                 vypsaniProhry(g);
                 casovac.stop();
+                return;
             }
+
+            vykresliPromene(g);
         }
-        if (engine.getZivoty() <= 0) {
-            vypsaniProhry(g);
-            casovac.stop();
-            return;
-        }
-        vykresliPromene(g);
+
     }
 
     private void vykresliPromene(Graphics g) {
@@ -119,13 +115,10 @@ public class Hra extends JPanel {
         for (int i = 0; i < superJidlo.size(); i++) {
             superJidlo.get(i).vykresleniSuperJidla(g);
         }
-        /**
         ArrayList<MistaZmenySmeru> mistaZmenySmeru = engine.getMistaZmenySmeru();
         for (int i = 0; i < mistaZmenySmeru.size() ; i++) {
             mistaZmenySmeru.get(i).vykresliSe(g);
         }
-         */
-
     }
 
     private void vypisScore(Graphics g) {
@@ -150,31 +143,17 @@ public class Hra extends JPanel {
     private void pocetZivotu(Graphics g) {
         g.setColor(Color.YELLOW);
         g.setFont(Font.getFont(Font.MONOSPACED));
-        g.drawString("ZIVOTY :   " + engine.getZivoty(), 125, 15);
+        g.drawString("ZIVOTY :   " + engine.getZivotyHrace(), 125, 15);
     }
 
     private class PoslouchaniCasovace implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             engine.skok();
-            /**
-            if(engine.jeKonecHry()){
-                System.out.println("Gamee over");
+            if(engine.konecLevelu()){
+                engine.nactiDalsiUroven();
             }
-             */
-
             repaint();
         }
     }
-
-
-    public int getSIRKA_PANELU() {
-        return this.getWidth();
-    }
-
-    public int getVYSKA_PANELU() {
-
-        return this.getHeight();
-    }
-
 }

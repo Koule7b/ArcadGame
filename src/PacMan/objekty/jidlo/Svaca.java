@@ -1,7 +1,9 @@
 package PacMan.objekty.jidlo;
 
 import java.awt.*;
-public class Svaca {
+import java.io.Serializable;
+
+public class Svaca implements Serializable{
     private final int DELKASTRANY = 5;
     private int x, y;
     private boolean viditelny = true;

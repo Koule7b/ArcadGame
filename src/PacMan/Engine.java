@@ -1,6 +1,7 @@
 package PacMan;
 
 import PacMan.objekty.Prekazka;
+import PacMan.objekty.jidlo.SiloKoule;
 import PacMan.objekty.jidlo.SuperJidlo;
 import PacMan.objekty.jidlo.Svaca;
 import PacMan.objekty.mistaZmenySmeru.MistaZmenySmeru;
@@ -12,6 +13,7 @@ import PacMan.sluzby.VystavenyLevelu;
 import PacMan.urovne.Uroven;
 
 import java.util.ArrayList;
+import java.util.Timer;
 
 /**
  * This abstract class includes all of thinks witch have all class in share.
@@ -25,9 +27,10 @@ public class Engine {
     protected Movinator3000 movinator3000;
     private int velikostSirka;
     private int velikostVyska;
+    private boolean konecHry = false;
 
     protected VystavenyLevelu tvorbaUrovne = new VystavenyLevelu();
-    public int uroven = 0;
+    private int uroven = 0;
 
     public Engine(int velikostSirka, int velikostVyska) {
         //hrac = new Hrac();
@@ -35,11 +38,21 @@ public class Engine {
         this.velikostVyska = velikostVyska;
         nactiUroven(uroven);
     }
+    public boolean konecLevelu(){
+        return getSvaca().size() == 0;
+    }
 
-    protected void nactiUroven(int cisloUrovene) {
+    public boolean nactiUroven(int cisloUrovene) {
 
-        aktualni = tvorbaUrovne.get(cisloUrovene);
-        movinator3000 = new Movinator3000(velikostSirka, velikostVyska, aktualni, zivoty, scorePotvurek, scoreHrace);
+        aktualni = tvorbaUrovne.nacti(cisloUrovene);
+        if(aktualni == null){
+            konecHry = true;
+            return false;
+        }else {
+            movinator3000 = new Movinator3000(velikostSirka, velikostVyska, aktualni, zivoty, scorePotvurek, scoreHrace);
+            uroven++;
+            return true;
+        }
     }
 
     public int getScoreHrace() {
@@ -67,34 +80,32 @@ public class Engine {
         return aktualni.getPrekazky();
     }
 
-    public int getZivoty() {
+    public int getZivotyHrace() {
         return movinator3000.getZivoty();
     }
 
-    public boolean hracVyhral() {
-        return getScoreHrace() > getScorePotvurek();
+    public boolean nactiDalsiUroven(){
+        return nactiUroven(uroven);
     }
+
+    public boolean KonecHry() {
+    return konecHry;
+    }
+    public boolean HracVyhral(){return getScoreHrace() > getScorePotvurek();}
 
     public ArrayList<MistaZmenySmeru> getMistaZmenySmeru() {
         return aktualni.getMistaZmenySmeru();
     }
 
-    public int getUroven() {
-        return uroven;
-    }
-    public int setUroven(int uroven){
-        return this.uroven = uroven;
+
+    private void setScoreHrace() {
+        scoreHrace = movinator3000.getScoreHrace();
     }
 
-    public void setScoreHrace(int score) {
-        scoreHrace = score;
+    private void setScorePotvurek() {
+        scorePotvurek = movinator3000.getScorePotvurek();
     }
-
-    public void setScorePotvurek(int score) {
-        scorePotvurek = score;
-    }
-    public int getZivotyHrace(){return zivoty;}
-    public int setZivotyHrace(int zivoty){return this.zivoty = zivoty;}
+    private int setZivotyHrace(){return this.zivoty = movinator3000.getZivoty();}
 
     public void zmenSmer(Smery smer) {
         aktualni.getHrac().setSmer(smer);
@@ -102,55 +113,9 @@ public class Engine {
 
     public void skok() {
         movinator3000.pohniVsim();
-
+        setZivotyHrace();
+        setScorePotvurek();
+        setScoreHrace();
     }
-
-    /**
-     * Method with paint walls.
-     *
-     * @param g
-     */
-/*    private void vykresliPrekazky(Graphics g) {
-        for (int i = 0; i < parametryPrekazek.length; i++) {
-            int[] parametryPrekazky = parametryPrekazek[i];
-            g.setColor(barvaVnitrkuPrekazek);
-            g.fillRect(parametryPrekazky[0], parametryPrekazky[1], parametryPrekazky[2], parametryPrekazky[3]);
-            g.setColor(barvaOkrajePrekazek);
-            g.drawRect(parametryPrekazky[0], parametryPrekazky[1], parametryPrekazky[2], parametryPrekazky[3]);
-        }
-    }
-
-*/
-    /**
-     * Method paints actual level. Here the picture of level gets together from smaller parts.
-     *
-     * @param g
-     */
-  /*  public void vykresliUroven(Graphics g) {
-        vykresliPrekazky(g);
-        //vykresliPostavicky(g);
-    }
-*/
-    /**
-     * Method, witch draws pills.
-     *
-     * @param g
-     */
-/*
-    private void vykresliPostavicky(Graphics g) {
-        g.setColor(Color.ORANGE);
-        for (int i = 0; i < parametryPotvurek.length; i++) {
-            int[] parmetryPotvurky = parametryPotvurek[i];
-            g.fillRect(parmetryPotvurky[0], parmetryPotvurky[1], parmetryPotvurky[2], parmetryPotvurky[3]);
-        }
-    }
-*/
-
-
-/**
- public Rectangle getOkrajePotvurky(int i) {
- return new Rectangle(parametryPotvurek[i][0], parametryPotvurek[i][1], parametryPotvurek[i][2], parametryPotvurek[i][3]);
- }
- */
 }
 

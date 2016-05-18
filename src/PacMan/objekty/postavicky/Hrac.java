@@ -8,11 +8,12 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.ImageObserver;
+import java.io.Serializable;
 import javax.swing.ImageIcon;
 
 public class Hrac extends Postavicka {
     //private Color barva = Color.WHITE;
-    protected Image hrac = new ImageIcon("C:\\Users\\Admin\\IdeaProjects\\Hra\\src\\Grafika\\Hrac.PNG").getImage();
+    //protected Image hrac = new ImageIcon("C:\\Users\\Admin\\IdeaProjects\\Hra\\src\\Grafika\\Hrac.PNG").getImage();
     private Hra hra;
 
     public Hrac() {
@@ -20,6 +21,7 @@ public class Hrac extends Postavicka {
     }
 
     public void vykresliSe(Graphics g) {
-        g.drawImage(hrac, x, y, velikost, velikost, hra);
+        //g.drawImage(hrac, x, y, velikost, velikost, hra);
+        g.fillRect(x, y, velikost, velikost);
     }
 }

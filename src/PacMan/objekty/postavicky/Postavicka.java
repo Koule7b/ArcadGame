@@ -8,11 +8,12 @@ import PacMan.sluzby.Movinator3000;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Created by Admin on 7.4.2016.
  */
-abstract public class Postavicka {
+abstract public class Postavicka implements Serializable{
     protected int x;
     protected int y;
     protected int velikost = 20;

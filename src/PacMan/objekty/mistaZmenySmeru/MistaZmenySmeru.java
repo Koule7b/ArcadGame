@@ -1,11 +1,12 @@
 package PacMan.objekty.mistaZmenySmeru;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Created by Admin on 29.4.2016.
  */
-public class MistaZmenySmeru {
+public class MistaZmenySmeru implements Serializable {
     int x;
     int y;
     int sirka;

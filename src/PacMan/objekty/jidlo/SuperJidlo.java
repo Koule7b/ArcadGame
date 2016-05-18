@@ -3,11 +3,12 @@ package PacMan.objekty.jidlo;
 import PacMan.okna.Hra;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Created by Admin on 24.3.2016.
  */
-public class SuperJidlo {
+public class SuperJidlo implements Serializable{
     private int souradniceX, souradniceY, cislo;
     private final int velikost = 10;
     private boolean viditelny = true;

@@ -1,6 +1,7 @@
 package PacMan.urovne;
 
 import PacMan.objekty.Prekazka;
+import PacMan.objekty.jidlo.SiloKoule;
 import PacMan.objekty.jidlo.SuperJidlo;
 import PacMan.objekty.jidlo.Svaca;
 import PacMan.objekty.mistaZmenySmeru.MistaZmenySmeru;
@@ -9,17 +10,19 @@ import PacMan.objekty.postavicky.Potvurkaa;
 import PacMan.objekty.postavicky.Smery;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Admin on 19.4.2016.
  */
-public class Uroven {
+public class Uroven implements Serializable{
     protected ArrayList<Prekazka> prekazky = new ArrayList<>();
     protected ArrayList<Potvurkaa> potvurky = new ArrayList<>();
     protected ArrayList<MistaZmenySmeru> mistaZmenySmeru = new ArrayList<>();
     protected ArrayList<SuperJidlo> superJidloo = new ArrayList<>();
     protected ArrayList<Svaca> svaca;
+    protected ArrayList<SiloKoule> silokoule = new ArrayList<>();
 
 
     protected Color barvaVnitrku;
@@ -48,6 +51,10 @@ public class Uroven {
     }
     public void addHrac(int x, int y, int sirka, int vyska){
 
+    }
+    public void addSilokoule(int x, int y, int velikost){
+        SiloKoule siloKoule = new SiloKoule(x, y, velikost);
+        silokoule.add(siloKoule);
     }
     public void addSuperJidlo(int x, int y){
         SuperJidlo superJidlo = new SuperJidlo(x, y);
@@ -91,6 +98,7 @@ public class Uroven {
         return svaca;
     }
     public ArrayList<SuperJidlo> getSuperJidlo(){return superJidloo;}
+    public ArrayList<SiloKoule> getSilokoule(){return silokoule;}
 
     public Hrac getHrac() {return hrac;}
 }

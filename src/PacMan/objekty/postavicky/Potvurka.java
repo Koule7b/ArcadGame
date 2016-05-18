@@ -5,7 +5,6 @@ import PacMan.objekty.jidlo.Svaca;
 import java.awt.*;
 public class Potvurka {
     private int pp1, pp2, smerX, smerY, rychlostP1, cislo;
-    private Svaca smerr;
     public Potvurka() {
         Bod1();
     }

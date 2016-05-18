@@ -11,8 +11,12 @@ import PacMan.urovne.Uroven;
 import javafx.geometry.Pos;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
+import java.awt.event.ActionListener;
+import java.util.Timer;
 
 /**
  * Created by Admin on 19.4.2016.
@@ -24,7 +28,9 @@ public class Movinator3000 {
     private int scorePotvurek;
     private int zivoty;
     Random generator;
-    protected Engine engine;
+    public boolean silokouleAktivni;
+    private Timer silokoule;
+    private int casSilokoule;
 
     protected Uroven uroven;
 
@@ -52,16 +58,21 @@ public class Movinator3000 {
             int[] budouci = uroven.getHrac().budouciPozice();
             if(kontrolaSnedeniJidla(budouci[0], budouci[1], uroven.getHrac())){
                 scoreHrace++;
-                //engine.setScoreHrace(scoreHrace);
             }
             //Nekontroluje kolizi hráče s potvůrkou, když hráč stojí.
             //Povoluje chety, když hráč stojí nenii sněden.
             //;-)
+            kontrolaSnedeniSiloKoule(budouci[0], budouci[1], uroven.getHrac());
             if(kontrolaKolizeSPotvurkama(budouci[0], budouci[1], uroven.getHrac())){
-                zivoty--;
-                uroven.getHrac().setX(125);
-                uroven.getHrac().setY(230);
-                scorePotvurek = scorePotvurek + 30;
+                //if(!getSilokoule()) {
+                    zivoty--;
+                    uroven.getHrac().setX(125);
+                    uroven.getHrac().setY(230);
+                    scorePotvurek = scorePotvurek + 30;
+                //}else{
+                    //snedeniPotvurky(budouci[0], budouci[1], uroven.getHrac());
+                    //scoreHrace = scoreHrace + 50;
+                //}
             }
             if(kontrolaKolizeSuperJidla(budouci[0], budouci[1], uroven.getHrac())){
                 scoreHrace = scoreHrace + 30;
@@ -151,6 +162,23 @@ public class Movinator3000 {
         }
         return false;
     }
+    public void kontrolaSnedeniSiloKoule(int x, int y, Postavicka hrac){
+        for(int i = 0; i < uroven.getSilokoule().size(); i++) {
+            if (new Rectangle(x - 1, y - 1, hrac.getVelikost() + 2, hrac.getVelikost() + 2).intersects(uroven.getSilokoule().get(i).getOkraje())){
+                uroven.getSilokoule().remove(i);
+                setSilokoule(true);
+                return;
+            }
+        }
+    }
+    public void snedeniPotvurky(int x, int y, Postavicka hrac){
+        for (int i = 0; i < uroven.getPotvurky().size(); i++) {
+            if (new Rectangle(x - 1, y - 1, hrac.getVelikost() + 2, hrac.getVelikost() + 2).intersects(uroven.getPotvurky().get(i).getOkraje())) {
+                uroven.getPotvurky().remove(i);
+
+            }
+        }
+    }
      public boolean kontrolaSnedeniJidla(int x, int y, Postavicka postavicka){
      for (int i = 0; i < uroven.getSvaca().size() ; i++) {
      Rectangle okrajeJidla = uroven.getSvaca().get(i).getOkraje();
@@ -166,4 +194,10 @@ public class Movinator3000 {
     public int getScorePotvurek(){return scorePotvurek;}
 
     public int getZivoty(){return zivoty;}
+    public boolean getSilokoule(){return this.silokouleAktivni;}
+    public boolean setSilokoule(boolean promena){
+        this.silokouleAktivni = promena;
+        System.out.println("nastaveno");
+        return this.silokouleAktivni;
+    }
 }
