@@ -12,16 +12,12 @@ import java.io.Serializable;
 import javax.swing.ImageIcon;
 
 public class Hrac extends Postavicka {
-    //private Color barva = Color.WHITE;
-    //protected Image hrac = new ImageIcon("C:\\Users\\Admin\\IdeaProjects\\Hra\\src\\Grafika\\Hrac.PNG").getImage();
-    private Hra hra;
 
     public Hrac() {
         super(125, 230, Smery.stop);
     }
 
     public void vykresliSe(Graphics g) {
-        //g.drawImage(hrac, x, y, velikost, velikost, hra);
         g.fillRect(x, y, velikost, velikost);
     }
 }

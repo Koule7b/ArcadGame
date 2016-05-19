@@ -1,19 +1,17 @@
 package PacMan;
 
 import PacMan.objekty.Prekazka;
-import PacMan.objekty.jidlo.SiloKoule;
 import PacMan.objekty.jidlo.SuperJidlo;
 import PacMan.objekty.jidlo.Svaca;
 import PacMan.objekty.mistaZmenySmeru.MistaZmenySmeru;
 import PacMan.objekty.postavicky.Hrac;
-import PacMan.objekty.postavicky.Potvurkaa;
+import PacMan.objekty.postavicky.Potvurka;
 import PacMan.objekty.postavicky.Smery;
 import PacMan.sluzby.Movinator3000;
 import PacMan.sluzby.VystavenyLevelu;
 import PacMan.urovne.Uroven;
 
 import java.util.ArrayList;
-import java.util.Timer;
 
 /**
  * This abstract class includes all of thinks witch have all class in share.
@@ -67,7 +65,7 @@ public class Engine {
         return aktualni.getSvaca();
     }
 
-    public ArrayList<Potvurkaa> getPotvurky() {
+    public ArrayList<Potvurka> getPotvurky() {
         return aktualni.getPotvurky();
     }
     public ArrayList<SuperJidlo> getSuperJidlo(){return aktualni.getSuperJidlo();}

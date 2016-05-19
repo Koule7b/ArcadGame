@@ -6,7 +6,7 @@ import PacMan.objekty.jidlo.SuperJidlo;
 import PacMan.objekty.jidlo.Svaca;
 import PacMan.objekty.mistaZmenySmeru.MistaZmenySmeru;
 import PacMan.objekty.postavicky.Hrac;
-import PacMan.objekty.postavicky.Potvurkaa;
+import PacMan.objekty.postavicky.Potvurka;
 import PacMan.objekty.postavicky.Smery;
 
 import java.awt.*;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class Uroven implements Serializable{
     protected ArrayList<Prekazka> prekazky = new ArrayList<>();
-    protected ArrayList<Potvurkaa> potvurky = new ArrayList<>();
+    protected ArrayList<Potvurka> potvurky = new ArrayList<>();
     protected ArrayList<MistaZmenySmeru> mistaZmenySmeru = new ArrayList<>();
     protected ArrayList<SuperJidlo> superJidloo = new ArrayList<>();
     protected ArrayList<Svaca> svaca;
@@ -41,20 +41,13 @@ public class Uroven implements Serializable{
     }
 
     public void addPotvurka(int x, int y, Smery smer){
-        Potvurkaa potvurka = new Potvurkaa(x, y, smer);
+        Potvurka potvurka = new Potvurka(x, y, smer);
         potvurky.add(potvurka);
     }
 
     public void addPrekazka(int x, int y, int sirka, int vyska){
         Prekazka prekazka = new Prekazka(x, y, sirka, vyska, barvaVnitrku, barvaOkraje);
         prekazky.add(prekazka);
-    }
-    public void addHrac(int x, int y, int sirka, int vyska){
-
-    }
-    public void addSilokoule(int x, int y, int velikost){
-        SiloKoule siloKoule = new SiloKoule(x, y, velikost);
-        silokoule.add(siloKoule);
     }
     public void addSuperJidlo(int x, int y){
         SuperJidlo superJidlo = new SuperJidlo(x, y);
@@ -90,7 +83,7 @@ public class Uroven implements Serializable{
         return prekazky;
     }
 
-    public ArrayList<Potvurkaa> getPotvurky() {
+    public ArrayList<Potvurka> getPotvurky() {
         return potvurky;
     }
 

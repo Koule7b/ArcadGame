@@ -19,19 +19,4 @@ public class Svaca implements Serializable{
     public Rectangle getOkraje(){
         return new Rectangle(x, y, DELKASTRANY, DELKASTRANY);
     }
-
-    public boolean isViditelny(){
-        return viditelny;
-    }
-    public void skryt(){
-        //vokno.score++;
-        viditelny = false;
-    }
-
-    public void removeIf(boolean intersects) {
-
-    }
-    public int getDelkaStrany(){
-        return DELKASTRANY;
-    }
 }

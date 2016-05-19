@@ -103,7 +103,7 @@ public class Hra extends JPanel {
 
         engine.getHrac().vykresliSe(g);
 
-        ArrayList<Potvurkaa> potvurky = engine.getPotvurky();
+        ArrayList<Potvurka> potvurky = engine.getPotvurky();
         for (int i = 0; i < potvurky.size() ; i++) {
             potvurky.get(i).vykresliSe(g);
         }

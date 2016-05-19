@@ -1,21 +1,12 @@
 package PacMan.sluzby;
 
-import PacMan.Engine;
-import PacMan.Spusteni;
-import PacMan.objekty.Prekazka;
-import PacMan.objekty.postavicky.Hrac;
 import PacMan.objekty.postavicky.Postavicka;
-import PacMan.objekty.postavicky.Potvurkaa;
+import PacMan.objekty.postavicky.Potvurka;
 import PacMan.objekty.postavicky.Smery;
 import PacMan.urovne.Uroven;
-import javafx.geometry.Pos;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Random;
-import java.awt.event.ActionListener;
 import java.util.Timer;
 
 /**
@@ -43,12 +34,12 @@ public class Movinator3000 {
         this.scoreHrace = scoreHrace;
         this.scorePotvurek = scorePotvurek;
     }
-    public void nahodnySmer(Potvurkaa potvurkaa){
+    public void nahodnySmer(Potvurka potvurka){
         int nahoda = generator.nextInt(1900) + 1;
         //int hahoda2 =
         if(nahoda % (generator.nextInt(500) + 1) == 0) {
             Smery[] smer = Smery.values();
-            potvurkaa.setSmer(smer[generator.nextInt(Smery.values().length - 1)]);
+            potvurka.setSmer(smer[generator.nextInt(Smery.values().length - 1)]);
         }
     }
 
@@ -84,7 +75,7 @@ public class Movinator3000 {
 
 
         for (int i = 0; i < uroven.getPotvurky().size(); i++) {
-            Potvurkaa potvurka = uroven.getPotvurky().get(i);
+            Potvurka potvurka = uroven.getPotvurky().get(i);
             if(kontrolaKolize(potvurka)){
                 potvurka.pohyb();
             }else{
