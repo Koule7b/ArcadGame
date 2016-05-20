@@ -24,9 +24,11 @@ import javax.swing.ImageIcon;
  * Třída hra rozšiřuje/dědí z třídy JPanel, takže se v okně vytvoří panel s hrou.
  */
 public class Hra extends JPanel {
+    // instanční proměná Engine
     private Engine engine;
+
+    //instanční proměná Timer
     private Timer casovac;
-    private Image gameoverP = new ImageIcon("C:\\Users\\Admin\\IdeaProjects\\Hra\\src\\Pac - Man.jpg").getImage();
 
     /**
      * Konstruktor třídy hra nastaví velikost panelu 300x500 (sirka x vyska)
@@ -154,10 +156,9 @@ public class Hra extends JPanel {
      * @param g
      */
     private void vypisVyhru(Graphics g) {
-        //this.setBackground(Color.BLUE);
+        this.setBackground(Color.BLUE);
         g.setColor(Color.ORANGE);
-        g.drawImage(gameoverP,0,19,this);
-        //g.drawString("V Y H R Á L / A  J S I .", 90, 270);
+        g.drawString("V Y H R Á L / A  J S I .", 90, 270);
     }
 
     /**

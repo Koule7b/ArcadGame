@@ -9,7 +9,11 @@ import java.io.Serializable;
  * Třída implementující serializable pro serializování.
  */
 public class SuperJidlo implements Serializable{
+
+    //souřadnice na osách
     private int souradniceX, souradniceY;
+
+    //velikost
     private final int velikost = 10;
 
     /**

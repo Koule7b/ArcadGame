@@ -8,7 +8,8 @@ import java.awt.*;
 
 public class Potvurka extends Postavicka{
 
-    Color barva = Color.ORANGE;
+    //proměná typu Color se přiřadí oranžová.
+    private Color barva = Color.ORANGE;
 
     /**
      * konstrukor nastaví souřadnice "potvůrek" a výchozí směr, přes Konstruktor "Postavicka" v třídě Postavicka.

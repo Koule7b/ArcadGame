@@ -6,12 +6,18 @@ import java.io.Serializable;
  * Abstraktní třída implementující serializable z důvodu serializace a zapisování do souboru.
  */
 abstract public class Postavicka implements Serializable{
+    //suřadnice na osách x, y
     protected int x;
     protected int y;
+
+    //velikost
     protected int velikost = 20;
 
-    protected Smery smer;
-    protected int rychlost = 1;
+    // proměná typu Smery, které se přiřadí směr dle nastavení.
+    private Smery smer;
+
+    //proměná typu int udávanící počet pixelů za 1 skok (obnovení plochy).
+    private int rychlost = 1;
 
     /**
      * KOnstruktor postavičky nastaví souřadnice a směr dle parametrů.

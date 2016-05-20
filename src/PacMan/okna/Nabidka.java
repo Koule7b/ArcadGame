@@ -11,7 +11,10 @@ import javax.swing.*;
  * Nabidka je panel, který umožňuje zvojit, jestli hru chci spustit, nebo vypnout, implementuje ActionListener.
  */
 public class Nabidka extends JPanel implements ActionListener {
+    //instanční proměná grafiky
     private Grafika okno;
+
+    //proměné typu string, kterépopisují tlačítko.
     final private String TLACITKO_SPUSTIT = "Spustit";
     final private String TLACITKO_VYPNOUT = "Vypnout";
 

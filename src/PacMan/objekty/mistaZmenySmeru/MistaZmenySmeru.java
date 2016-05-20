@@ -9,10 +9,13 @@ import java.io.Serializable;
  * Dále řešeno v Pohybovac.
  */
 public class MistaZmenySmeru implements Serializable {
-    int x;
-    int y;
-    int sirka;
-    int vyska;
+    //souřadnice na osách
+    private int x;
+    private int y;
+
+    //velikosti
+    private int sirka;
+    private int vyska;
 
     /**
      * Konstruktor přiřadí souřadnicím a velikostem hodnoty.

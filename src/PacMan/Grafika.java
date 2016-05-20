@@ -10,7 +10,9 @@ import java.awt.*;
  * Třída Grafika si vytvoří okno do kterého pomocí metody "otevriNabidku()" promítne nabídku a pomocí "otevriHru()" promítne hru.
  */
 public class Grafika extends JFrame {
+    //instanční proměná nabídky, která se přidá do okna.
     private Nabidka nabidka;
+    //instanční proměná hry, která bude umístěna časem v okně
     private Hra hra;
 
     public Grafika() {

@@ -18,16 +18,22 @@ import java.util.ArrayList;
  *Určuje také konec hry, konec úrovně, dokonce i kdo vyhrál, jestli "potvůrky", nebo "hráč".
  */
 public class Engine {
+
+    //počet životů, která má hráč.
     private int zivoty = 3;
-    protected int scoreHrace = 0;
-    protected int scorePotvurek = 0;
-    protected Uroven aktualni;
-    protected Pohybovac pohybovac;
+    private int scoreHrace = 0;
+    private int scorePotvurek = 0;
+    //aktuální úroveň
+    private Uroven aktualni;
+    private Pohybovac pohybovac;
+    //velikost panelu (šířka)
     private int velikostSirka;
+    //velikost panelu (výška)
     private int velikostVyska;
+    //proměná, jestli je konec hry
     private boolean konecHry = false;
 
-    protected VystavenyLevelu tvorbaUrovne = new VystavenyLevelu();
+    private VystavenyLevelu tvorbaUrovne = new VystavenyLevelu();
     private int uroven = 0;
 
     /**

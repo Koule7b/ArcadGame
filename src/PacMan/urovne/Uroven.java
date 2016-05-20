@@ -16,17 +16,21 @@ import java.util.ArrayList;
  * Created by Admin on 19.4.2016.
  */
 public class Uroven implements Serializable{
-    protected ArrayList<Prekazka> prekazky = new ArrayList<>();
-    protected ArrayList<Potvurka> potvurky = new ArrayList<>();
-    protected ArrayList<MistaZmenySmeru> mistaZmenySmeru = new ArrayList<>();
-    protected ArrayList<SuperJidlo> superJidloo = new ArrayList<>();
-    protected ArrayList<Svaca> svaca;
+    /**
+     * Proměné znázorňují ArrayListy, daného typu.
+     */
+    private ArrayList<Prekazka> prekazky = new ArrayList<>();
+    private ArrayList<Potvurka> potvurky = new ArrayList<>();
+    private ArrayList<MistaZmenySmeru> mistaZmenySmeru = new ArrayList<>();
+    private ArrayList<SuperJidlo> superJidloo = new ArrayList<>();
+    private ArrayList<Svaca> svaca;
 
+    // barvy, které určují okraje a vnitřek.
+    private Color barvaVnitrku;
+    private Color barvaOkraje;
 
-    protected Color barvaVnitrku;
-    protected Color barvaOkraje;
-
-    protected Hrac hrac = new Hrac();
+    //instanční proměná hráč
+    private Hrac hrac = new Hrac();
 
     /**
      * Konstruktor nastaví barvu vnitřku překážek a barvu okrajů překážek dle parametrů.

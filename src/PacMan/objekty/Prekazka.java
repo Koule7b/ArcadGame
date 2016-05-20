@@ -7,10 +7,15 @@ import java.io.Serializable;
  * Třída, která implementuje Serializable, kvůli serializaci a ukládání do souboru.
  */
 public class Prekazka implements Serializable{
+    //souřadnice na osách x a y
     private int x;
     private int y;
+
+    //velikosti
     private  int sirka;
     private int vyska;
+
+    //barvy okrajů a vnitřků
     private Color barvaVnitrku;
     private Color barvaOkraje;
 

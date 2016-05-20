@@ -12,14 +12,22 @@ import java.util.Random;
  * Třída Pohybovac má na starosti veškerý pohyb, kontrolu kolize -> i přičítání score.
  */
 public class Pohybovac {
-    int maxSirka;
-    int maxVyska;
+    // maximální velikost panelu
+    private int maxSirka;
+    private int maxVyska;
+
+    //score
     private int scoreHrace;
     private int scorePotvurek;
-    private int zivoty;
-    Random generator;
 
-    protected Uroven uroven;
+    //zivoty
+    private int zivoty;
+
+    //instanční proměná Random
+    private Random generator;
+
+    //instanční proměná úrovně
+    private Uroven uroven;
 
     /**
      * nastaví velikost hrací plochy, úroveň, životy, score dle parametrů, vytvoří novou instanci Random().

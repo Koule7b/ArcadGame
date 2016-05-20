@@ -7,7 +7,11 @@ import java.io.Serializable;
  * Třída Svaca implementuje serializable pro serializaci.
  */
 public class Svaca implements Serializable{
+
+    //velikost
     private final int DELKASTRANY = 5;
+
+    //souřadnice na osách x a y
     private int x, y;
 
     /**
