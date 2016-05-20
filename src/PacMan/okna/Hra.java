@@ -21,14 +21,22 @@ import javax.swing.ImageIcon;
 
 /**
  * Author: Štěpán Mudra.
+ * Třída hra rozšiřuje/dědí z třídy JPanel, takže se v okně vytvoří panel s hrou.
  */
 public class Hra extends JPanel {
     private Engine engine;
     private Timer casovac;
     private Image gameoverP = new ImageIcon("C:\\Users\\Admin\\IdeaProjects\\Hra\\src\\Pac - Man.jpg").getImage();
-    private int casSilokoule = 0;
 
-
+    /**
+     * Konstruktor třídy hra nastaví velikost panelu 300x500 (sirka x vyska)
+     * Vytvoří novou instanci vnitří třídy "PoslouchaniCasovace()", která se jmenuje publikum.
+     * Nastaví instanci třídy "Timer", čas obnovení a kdo se má obnovovat, spustí "Timer".
+     * Určí preferovanou šírku výšku "this.setPreferredSize(new Dimension(sirka, vyska))".
+     * Přiřadí instanci třídy "Engine" smysl a vloží do ní nový Engine, kterému pomocí parametrů předá velikost panelu.
+     * Nastaví barvu pozadí na šedou.
+     * Pomocí vnitřní anonymní třídy mění podle zmačknutého tlačítka novySmer a pokud novySmer != null, tak zavola "engine.zmenSmer(novySmer)"
+     */
     public Hra() {
         int sirka = 300;
         int vyska = 500;
@@ -36,7 +44,6 @@ public class Hra extends JPanel {
         casovac = new Timer(10, publikum);
         casovac.start();
         this.setPreferredSize(new Dimension(sirka, vyska));
-        setBackground(Color.RED);
         this.engine = new Engine(sirka, vyska);
         this.setBackground(Color.DARK_GRAY);
 
@@ -61,22 +68,25 @@ public class Hra extends JPanel {
                     case KeyEvent.VK_RIGHT:
                         novySmer = Smery.pravo; break;
                 }
-
                 if(novySmer != null){
                     engine.zmenSmer(novySmer);
                 }
             }
         });
-        setFocusable(true);
     }
 
+    /**
+     * Metoda která má za úkol vykreslit hrací plochu a překreslovat ji.
+     * @param g
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (engine.KonecHry() && !engine.nactiDalsiUroven()) {
+        //Kontroluje jeslti nastal konec hry.
+        if (engine.KonecHry()) {
+            //pokud ano, tak zkoumá, kdo vyhrál, pokd hráč, tak vykreslí výhru, pokud nevyhrál hráč -> vyhrály potvůrky a vykreslí prohru, v každém případě stopne časovač.
              if(engine.HracVyhral()) {
              vypisVyhru(g);
              casovac.stop();
-             return;
              }else{
              vypsaniProhry(g);
              casovac.stop();
@@ -95,6 +105,10 @@ public class Hra extends JPanel {
 
     }
 
+    /**
+     * metoda, která vykresluje všechny objekty na hrací ploše.
+     * @param g
+     */
     private void vykresliPromene(Graphics g) {
         ArrayList<Svaca> jidlo = engine.getSvaca();
         for (int i = 0; i < jidlo.size(); i++) {
@@ -115,37 +129,59 @@ public class Hra extends JPanel {
         for (int i = 0; i < superJidlo.size(); i++) {
             superJidlo.get(i).vykresleniSuperJidla(g);
         }
+        /**
+         * tato čáat je zakomentovaná, protože finální uživatel vidět místa, kde "potvůrky" mohou změnit směr nemá,
+         * je zde jen a pouze jako pomůcka, když jsem přidával místa pro změnu směru.
         ArrayList<MistaZmenySmeru> mistaZmenySmeru = engine.getMistaZmenySmeru();
         for (int i = 0; i < mistaZmenySmeru.size() ; i++) {
             mistaZmenySmeru.get(i).vykresliSe(g);
         }
+         */
     }
 
+    /**
+     * metoda vypisujici score
+     * @param g
+     */
     private void vypisScore(Graphics g) {
         g.setColor(Color.YELLOW);
         g.drawString("Score Hrace: "+String.valueOf(engine.getScoreHrace()), 200, 15);
         g.drawString("Score Potvurek: "+String.valueOf(engine.getScorePotvurek()), 15, 15);
     }
 
+    /**
+     * metoda vykreslujici vyhru
+     * @param g
+     */
     private void vypisVyhru(Graphics g) {
         //this.setBackground(Color.BLUE);
         g.setColor(Color.ORANGE);
-        //Graphics2D g2d = (Graphics2D) g;
         g.drawImage(gameoverP,0,19,this);
         //g.drawString("V Y H R Á L / A  J S I .", 90, 270);
     }
 
+    /**
+     * metoda vykreslujici prohru
+     * @param g
+     */
     private void vypsaniProhry(Graphics g) {
         g.setColor(Color.orange);
         g.drawString("P A R D O N ,  A L E  G A M E  O V E R .", 70, 270);
     }
 
+    /**
+     * metoda vypisujici pocet zivotu
+     * @param g
+     */
     private void pocetZivotu(Graphics g) {
         g.setColor(Color.YELLOW);
         g.setFont(Font.getFont(Font.MONOSPACED));
         g.drawString("ZIVOTY :   " + engine.getZivotyHrace(), 125, 15);
     }
 
+    /**
+     * vnitřní anonymní třída, která na povel casovace provede veskere zmeny stavu, pokud jsou a prekresli panel.
+     */
     private class PoslouchaniCasovace implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

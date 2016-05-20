@@ -1,7 +1,7 @@
 package PacMan;
 
 /**
- * Created by Admin on 19.4.2016.
+ * Tato třída má za úkol vytvořit instanci třídy Grafika a následně spustit nabídku s tlačítky.
  */
 public class Spusteni {
     public static void main(String[] args) {

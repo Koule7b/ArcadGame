@@ -14,8 +14,8 @@ import PacMan.urovne.Uroven;
 import java.util.ArrayList;
 
 /**
- * This abstract class includes all of thinks witch have all class in share.
- * For example Pac-Man's pills, power pill(if power pill exist), walls, ghosts & player's figure.
+ * Engine je třída, která se stará o všechnu interakci ve hře co se týče načítání úrovní, předávání score z úrovně 1. do úrovně 2.
+ *Určuje také konec hry, konec úrovně, dokonce i kdo vyhrál, jestli "potvůrky", nebo "hráč".
  */
 public class Engine {
     private int zivoty = 3;
@@ -30,19 +30,41 @@ public class Engine {
     protected VystavenyLevelu tvorbaUrovne = new VystavenyLevelu();
     private int uroven = 0;
 
+    /**
+     *Nastaví šířku a výšku panelu, načte úroveň 0 (indexace úrovní od 0).
+     * @param velikostSirka
+     * @param velikostVyska
+     */
     public Engine(int velikostSirka, int velikostVyska) {
-        //hrac = new Hrac();
         this.velikostSirka = velikostSirka;
         this.velikostVyska = velikostVyska;
         nactiUroven(uroven);
     }
+
+    /**
+     * vrátí, boolean, jestli je konec úrovně (true), nebo ne (false)
+     * konce úrovně se zjišťuje pomocí "snědených" bodů "jídla".
+     * @return
+     */
     public boolean konecLevelu(){
         return getSvaca().size() == 0;
     }
 
-    public boolean nactiUroven(int cisloUrovene) {
+    /**
+     * Tato metoda má na starosti přetvoření aktuální úrovně na úroveň, kterou načte pomocí "tvorbaUrovne.nacti(cisloUrovne)".
+     * cisloUrovne je parametr, který určuje, jakou úrovneň zrovna načte (indexováno od 0).
+     * Dále zkontroluje, jestli další úroveň je null (pokud ano znamená to, že další úroveň není vytvořená a nastaví konec hry na true.
+     * Pokavaď ovšem další úroveň lze načíst, tak vytvoří novou instanci třídy Movinator3000, s parametrama aktualnima.
+     * (scoreHrace, scorePotvurek, zivoty, aktualni) všechno to jsou údaje, které se mohou v průběhu hry změnit a nejspíš se i změní.
+     * Dále se předává movinator3000 i velikost okna, která se sice nemění, ale movinator tyto údaje potřebuje, aby mu postavičky neutíkaly
+     * z hrací plochy.
+     * Poté "nactiUroven(cisloUrovne) navýší proměnou úroveň o jednu výš, aby nenačítala pořád dokola stejnou úroveň.
+     * @param cisloUrovne
+     * @return
+     */
+    public boolean nactiUroven(int cisloUrovne) {
 
-        aktualni = tvorbaUrovne.nacti(cisloUrovene);
+        aktualni = tvorbaUrovne.nacti(cisloUrovne);
         if(aktualni == null){
             konecHry = true;
             return false;
@@ -53,18 +75,34 @@ public class Engine {
         }
     }
 
+    /**
+     * vrací score hráče.
+     * @return
+     */
     public int getScoreHrace() {
         return movinator3000.getScoreHrace();
     }
 
+    /**
+     * vrací score "potvůrek".
+     * @return
+     */
     public int getScorePotvurek() {
         return movinator3000.getScorePotvurek();
     }
 
+    /**
+     * vrací ArrayList "sváči" bodů, které ještě postavičky "nesnědly".
+     * @return
+     */
     public ArrayList<Svaca> getSvaca() {
         return aktualni.getSvaca();
     }
 
+    /**
+     * vrací ArrayList "potvůrek".
+     * @return
+     */
     public ArrayList<Potvurka> getPotvurky() {
         return aktualni.getPotvurky();
     }
