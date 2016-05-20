@@ -7,23 +7,30 @@ import PacMan.urovne.Uroven;
 
 import java.awt.*;
 import java.util.Random;
-import java.util.Timer;
 
 /**
- * Created by Admin on 19.4.2016.
+ * Třída Pohybovac má na starosti veškerý pohyb, kontrolu kolize -> i přičítání score.
  */
-public class Movinator3000 {
+public class Pohybovac {
     int maxSirka;
     int maxVyska;
     private int scoreHrace;
     private int scorePotvurek;
     private int zivoty;
     Random generator;
-    public boolean silokouleAktivni;
 
     protected Uroven uroven;
 
-    public Movinator3000(int maxSirka, int maxVyska, Uroven uroven, int zivoty, int scoreHrace, int scorePotvurek) {
+    /**
+     * nastaví velikost hrací plochy, úroveň, životy, score dle parametrů, vytvoří novou instanci Random().
+     * @param maxSirka
+     * @param maxVyska
+     * @param uroven
+     * @param zivoty
+     * @param scoreHrace
+     * @param scorePotvurek
+     */
+    public Pohybovac(int maxSirka, int maxVyska, Uroven uroven, int zivoty, int scoreHrace, int scorePotvurek) {
         this.maxSirka = maxSirka;
         this.maxVyska = maxVyska;
         this.uroven = uroven;
@@ -33,6 +40,10 @@ public class Movinator3000 {
         this.scorePotvurek = scorePotvurek;
     }
 
+    /**
+     *Metoda, která generuje pravděpodobnost změny směru, následně i "náhodný" směr.
+     * @param potvurka
+     */
     public void nahodnySmer(Potvurka potvurka) {
         int nahoda = generator.nextInt(1900) + 1;
         if (nahoda % (generator.nextInt(500) + 1) == 0) {
@@ -41,16 +52,27 @@ public class Movinator3000 {
         }
     }
 
+    /**
+     * Metoda která volá kontroly kolizí a následně pokud je cesta volná vším pohne.
+     * Pokud cesta je neprůchodná, tak hráčem nepohne, potvůrkám přířadí "náhodný" směr.
+     * Pokud hráč má cestu volnou, metoda ověrí, jestli je v kolizi s jídlem, pokud ano navýší score hráče o 1,
+     * dále ověří, jestli hráč narazil do potvůrky, pokud ano nastaví výchozí souřadnice na aktuální,
+     * sníží životy, přičte score potvůrkám, dále zkontroluje jestli hráč snědl superJidlo, pokud ano přičte ke score 30.
+     * I u potvůrek je provedena kontrola snědení jídla, superjídla, navíc se u nich kontroluje i kolize s místem, kde mohou změnit směr.
+     * Pokud jsou s tímto místem v kolizi zavolá se metoda nahodnySmer().
+     */
     public void pohniVsim() {
-        if (kontrolaKolize(uroven.getHrac())) {
+        if (kontrolaKolizeProZastaveni(uroven.getHrac())) {
             uroven.getHrac().pohyb();
             int[] budouci = uroven.getHrac().budouciPozice();
             if (kontrolaSnedeniJidla(budouci[0], budouci[1], uroven.getHrac())) {
                 scoreHrace++;
             }
-            //Nekontroluje kolizi hráče s potvůrkou, když hráč stojí.
-            //Povoluje chety, když hráč stojí nenii sněden.
-            //;-)
+            /**
+            Nekontroluje kolizi hráče s potvůrkou, když hráč stojí.
+            Povoluje chety, když hráč stojí nenii sněden.
+            ;-)
+             */
             if (kontrolaKolizeSPotvurkama(budouci[0], budouci[1], uroven.getHrac())) {
 
                 zivoty--;
@@ -67,7 +89,7 @@ public class Movinator3000 {
 
         for (int i = 0; i < uroven.getPotvurky().size(); i++) {
             Potvurka potvurka = uroven.getPotvurky().get(i);
-            if (kontrolaKolize(potvurka)) {
+            if (kontrolaKolizeProZastaveni(potvurka)) {
                 potvurka.pohyb();
             } else {
                 Smery[] smer = Smery.values();
@@ -87,13 +109,25 @@ public class Movinator3000 {
         }
     }
 
-    private boolean kontrolaKolize(Postavicka postavicka) {
+    /**
+     * Kontroluje kolizi, pro kterou je nutno postavičku zastavit (s překážkou a hrací plochou).
+     * @param postavicka
+     * @return
+     */
+    private boolean kontrolaKolizeProZastaveni(Postavicka postavicka) {
         int[] budouci = postavicka.budouciPozice();
         boolean kontrolaKolizeVOkne = kontrolaKolizesOkrajemaHry(budouci[0], budouci[1], postavicka);
         boolean kontrolaKolizePrekazky = kontrolaKolizeSPrekazkama(budouci[0], budouci[1], postavicka);
         return !kontrolaKolizeVOkne && !kontrolaKolizePrekazky;
     }
 
+    /**
+     * Pro každou potvůrku kontroluje kolizi s místem, kde může náhodně změnit směr.
+     * @param x
+     * @param y
+     * @param postavicka
+     * @return
+     */
     private boolean kontrolaKolizesMistem(int x, int y, Postavicka postavicka) {
         for (int i = 0; i < uroven.getMistaZmenySmeru().size(); i++) {
             if (new Rectangle(x - 1, y - 1, postavicka.getVelikost() + 2, postavicka.getVelikost() + 2).intersects(uroven.getMistaZmenySmeru().get(i).getOkraje()))
@@ -104,6 +138,13 @@ public class Movinator3000 {
 
     }
 
+    /**
+     * kontroluje kolizi postavicky (hráče s potvůrkami).
+     * @param x
+     * @param y
+     * @param postavicka
+     * @return
+     */
     private boolean kontrolaKolizeSPotvurkama(int x, int y, Postavicka postavicka) {
         for (int i = 0; i < uroven.getPotvurky().size(); i++) {
             if (new Rectangle(x - 1, y - 1, postavicka.getVelikost() + 2, postavicka.getVelikost() + 2).intersects(uroven.getPotvurky().get(i).getOkraje())) {
@@ -114,6 +155,13 @@ public class Movinator3000 {
         return false;
     }
 
+    /**
+     * Kontroluje kolizi s okrajem herní plochy. Y je omezeno na 19 z důvodu popisek (score.....).
+     * @param x
+     * @param y
+     * @param postavicka
+     * @return
+     */
     private boolean kontrolaKolizesOkrajemaHry(int x, int y, Postavicka postavicka) {
         if ((x >= maxSirka - postavicka.getVelikost())) {
             return true;
@@ -125,6 +173,13 @@ public class Movinator3000 {
         return false;
     }
 
+    /**
+     * kontroluje kolizi se superJidlem a odebira superJidlo v případě kolize.
+     * @param x
+     * @param y
+     * @param postavicka
+     * @return
+     */
     private boolean kontrolaKolizeSuperJidla(int x, int y, Postavicka postavicka) {
         for (int i = 0; i < uroven.getSuperJidlo().size(); i++) {
             if (new Rectangle(x, y, postavicka.getVelikost() + 2, postavicka.getVelikost() + 2).intersects(uroven.getSuperJidlo().get(i).getOkraje())) {
@@ -135,7 +190,13 @@ public class Movinator3000 {
         return false;
     }
 
-
+    /**
+     * kontroluje kolizi s překážkama.
+     * @param x
+     * @param y
+     * @param postavicka
+     * @return
+     */
     private boolean kontrolaKolizeSPrekazkama(int x, int y, Postavicka postavicka) {
         for (int i = 0; i < uroven.getPrekazky().size(); i++) {
             if (new Rectangle(x - 1, y - 1, postavicka.getVelikost() + 2, postavicka.getVelikost() + 2).intersects(uroven.getPrekazky().get(i).getOkraje())) {
@@ -145,7 +206,13 @@ public class Movinator3000 {
         return false;
     }
 
-
+    /**
+     *Metoda, která kontroluje snědení jídla postavičkou dle parametru.
+     * @param x
+     * @param y
+     * @param postavicka
+     * @return
+     */
     private boolean kontrolaSnedeniJidla(int x, int y, Postavicka postavicka) {
         for (int i = 0; i < uroven.getSvaca().size(); i++) {
             Rectangle okrajeJidla = uroven.getSvaca().get(i).getOkraje();
@@ -157,25 +224,27 @@ public class Movinator3000 {
         return false;
     }
 
+    /**
+     * Metoda, která vrací score hráče.
+     * @return
+     */
     public int getScoreHrace() {
         return scoreHrace;
     }
 
+    /**
+     * Metoda, která vrací score potvůrek
+     * @return
+     */
     public int getScorePotvurek() {
         return scorePotvurek;
     }
 
+    /**
+     * Metoda, která vrací životy
+     * @return
+     */
     public int getZivoty() {
         return zivoty;
-    }
-
-    public boolean getSilokoule() {
-        return this.silokouleAktivni;
-    }
-
-    private boolean setSilokoule(boolean promena) {
-        this.silokouleAktivni = promena;
-        System.out.println("nastaveno");
-        return this.silokouleAktivni;
     }
 }

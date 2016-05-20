@@ -1,7 +1,6 @@
 package PacMan.urovne;
 
 import PacMan.objekty.Prekazka;
-import PacMan.objekty.jidlo.SiloKoule;
 import PacMan.objekty.jidlo.SuperJidlo;
 import PacMan.objekty.jidlo.Svaca;
 import PacMan.objekty.mistaZmenySmeru.MistaZmenySmeru;

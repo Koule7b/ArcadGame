@@ -1,22 +1,23 @@
 package PacMan.objekty.postavicky;
 
-import PacMan.okna.Hra;
-import javafx.geometry.Pos;
-
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.image.ImageObserver;
-import java.io.Serializable;
-import javax.swing.ImageIcon;
 
+/**
+ * POdtřída třídy "Postavicka", má na starosti hráče.
+ */
 public class Hrac extends Postavicka {
 
+    /**
+     * Konstruktor vytvoří pomocí Konstruktoru v Třídě "Postavicka" hráče na uvedené pozici a s směrem.
+     */
     public Hrac() {
         super(125, 230, Smery.stop);
     }
 
+    /**
+     * Vykreslení hráče .
+     * @param g
+     */
     public void vykresliSe(Graphics g) {
         g.fillRect(x, y, velikost, velikost);
     }

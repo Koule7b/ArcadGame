@@ -1,7 +1,7 @@
 package PacMan.objekty.postavicky;
 
 /**
- * Created by Admin on 4.4.2016.
+ * Třída enum, kde jsou napsány dovolené směry.
  */
 public enum Smery {
     nahoru,

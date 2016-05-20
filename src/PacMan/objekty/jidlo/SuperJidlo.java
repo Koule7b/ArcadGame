@@ -6,25 +6,34 @@ import java.awt.*;
 import java.io.Serializable;
 
 /**
- * Created by Admin on 24.3.2016.
+ * Třída implementující serializable pro serializování.
  */
 public class SuperJidlo implements Serializable{
-    private int souradniceX, souradniceY, cislo;
+    private int souradniceX, souradniceY;
     private final int velikost = 10;
-    private boolean viditelny = true;
+
+    /**
+     * Přiřadí proměným souradniceX a souradniceY hodnoty dle parametrů.
+     * @param x
+     * @param y
+     */
     public SuperJidlo(int x, int y){
         this.souradniceX = x;
         this.souradniceY = y;
     }
+
+    /**
+     * vykreslí dané "superJidlo"
+     * @param g
+     */
     public void vykresleniSuperJidla(Graphics g){
         g.setColor(Color.BLUE);
         g.fillRect(souradniceX, souradniceY, velikost, velikost);
     }
-    public boolean isViditelny(){
-        return viditelny;
-    }
-    public void skryt(){
-        viditelny = false;
-    }
+
+    /**
+     * vrací rovnoběžník okolo daného "superJidla".
+     * @return
+     */
     public Rectangle getOkraje(){return new Rectangle(souradniceX, souradniceY, velikost, velikost);}
 }

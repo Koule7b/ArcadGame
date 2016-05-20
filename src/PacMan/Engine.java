@@ -7,7 +7,7 @@ import PacMan.objekty.mistaZmenySmeru.MistaZmenySmeru;
 import PacMan.objekty.postavicky.Hrac;
 import PacMan.objekty.postavicky.Potvurka;
 import PacMan.objekty.postavicky.Smery;
-import PacMan.sluzby.Movinator3000;
+import PacMan.sluzby.Pohybovac;
 import PacMan.sluzby.VystavenyLevelu;
 import PacMan.urovne.Uroven;
 
@@ -22,7 +22,7 @@ public class Engine {
     protected int scoreHrace = 0;
     protected int scorePotvurek = 0;
     protected Uroven aktualni;
-    protected Movinator3000 movinator3000;
+    protected Pohybovac pohybovac;
     private int velikostSirka;
     private int velikostVyska;
     private boolean konecHry = false;
@@ -54,9 +54,9 @@ public class Engine {
      * Tato metoda má na starosti přetvoření aktuální úrovně na úroveň, kterou načte pomocí "tvorbaUrovne.nacti(cisloUrovne)".
      * cisloUrovne je parametr, který určuje, jakou úrovneň zrovna načte (indexováno od 0).
      * Dále zkontroluje, jestli další úroveň je null (pokud ano znamená to, že další úroveň není vytvořená a nastaví konec hry na true.
-     * Pokavaď ovšem další úroveň lze načíst, tak vytvoří novou instanci třídy Movinator3000, s parametrama aktualnima.
+     * Pokavaď ovšem další úroveň lze načíst, tak vytvoří novou instanci třídy Pohybovac, s parametrama aktualnima.
      * (scoreHrace, scorePotvurek, zivoty, aktualni) všechno to jsou údaje, které se mohou v průběhu hry změnit a nejspíš se i změní.
-     * Dále se předává movinator3000 i velikost okna, která se sice nemění, ale movinator tyto údaje potřebuje, aby mu postavičky neutíkaly
+     * Dále se předává pohybovac i velikost okna, která se sice nemění, ale movinator tyto údaje potřebuje, aby mu postavičky neutíkaly
      * z hrací plochy.
      * Poté "nactiUroven(cisloUrovne) navýší proměnou úroveň o jednu výš, aby nenačítala pořád dokola stejnou úroveň.
      * @param cisloUrovne
@@ -69,7 +69,7 @@ public class Engine {
             konecHry = true;
             return false;
         }else {
-            movinator3000 = new Movinator3000(velikostSirka, velikostVyska, aktualni, zivoty, scorePotvurek, scoreHrace);
+            pohybovac = new Pohybovac(velikostSirka, velikostVyska, aktualni, zivoty, scorePotvurek, scoreHrace);
             uroven++;
             return true;
         }
@@ -80,7 +80,7 @@ public class Engine {
      * @return
      */
     public int getScoreHrace() {
-        return movinator3000.getScoreHrace();
+        return pohybovac.getScoreHrace();
     }
 
     /**
@@ -88,7 +88,7 @@ public class Engine {
      * @return
      */
     public int getScorePotvurek() {
-        return movinator3000.getScorePotvurek();
+        return pohybovac.getScorePotvurek();
     }
 
     /**
@@ -131,7 +131,7 @@ public class Engine {
      * @return
      */
     public int getZivotyHrace() {
-        return movinator3000.getZivoty();
+        return pohybovac.getZivoty();
     }
     /**
      * vrací boolean jestli může načíst další úroveň (jestli další úroveň existuje, jestli je co načíst).
@@ -166,20 +166,20 @@ public class Engine {
      * nastavuje score hráče pomocí getteru z movinatoru3000.
      */
     private void setScoreHrace() {
-        scoreHrace = movinator3000.getScoreHrace();
+        scoreHrace = pohybovac.getScoreHrace();
     }
 
     /**
      * nastavuje score potvůrek pomocí getteru z movinatoru3000.
      */
     private void setScorePotvurek() {
-        scorePotvurek = movinator3000.getScorePotvurek();
+        scorePotvurek = pohybovac.getScorePotvurek();
     }
 
     /**
      * nastavuje životy hráče pomocí getteru z movinatoru3000.
      */
-    private int setZivotyHrace(){return this.zivoty = movinator3000.getZivoty();}
+    private int setZivotyHrace(){return this.zivoty = pohybovac.getZivoty();}
 
     /**
      * nastavuje pomocí parametru nový směr hráče.
@@ -190,10 +190,10 @@ public class Engine {
     }
 
     /**
-     * metoda, která volá metodu ze třídy "Movinator3000" "pohniVsim()" a přenastaví proměné score hráče, score potvůrek, životy hráče voláním příslušcých metod.
+     * metoda, která volá metodu ze třídy "Pohybovac" "pohniVsim()" a přenastaví proměné score hráče, score potvůrek, životy hráče voláním příslušcých metod.
      */
     public void skok() {
-        movinator3000.pohniVsim();
+        pohybovac.pohniVsim();
         setZivotyHrace();
         setScorePotvurek();
         setScoreHrace();

@@ -1,17 +1,9 @@
 package PacMan.objekty.postavicky;
 
-import PacMan.Engine;
-import PacMan.Grafika;
-import PacMan.Spusteni;
-import PacMan.okna.Hra;
-import PacMan.sluzby.Movinator3000;
-
-import javax.swing.*;
-import java.awt.*;
 import java.io.Serializable;
 
 /**
- * Created by Admin on 7.4.2016.
+ * Abstraktní třída implementující serializable z důvodu serializace a zapisování do souboru.
  */
 abstract public class Postavicka implements Serializable{
     protected int x;
@@ -21,20 +13,47 @@ abstract public class Postavicka implements Serializable{
     protected Smery smer;
     protected int rychlost = 1;
 
+    /**
+     * KOnstruktor postavičky nastaví souřadnice a směr dle parametrů.
+     * @param x
+     * @param y
+     * @param smer
+     */
     public Postavicka(int x, int y, Smery smer) {
         this.x = x;
         this.y = y;
         this.smer = smer;
     }
 
+    /**
+     * Vytvoří lokální proměnou typu int[], zavolá metodu bodouciPozice() a nastaví aktuální souřadnice dle hodnot budouciPozice().
+     */
     public void pohyb() {
         int[] pozice = budouciPozice();
         x = pozice[0];
         y = pozice[1];
     }
+
+    /**
+     * nastaví x - ovou souřadnici dle parametru.
+     * @param x
+     * @return
+     */
     public int setX(int x){return this.x = x;}
+
+    /**
+     * nastaví y - novou souřadnice dle parametru
+     * @param y
+     * @return
+     */
     public int setY(int y){return this.y = y;}
 
+    /**
+     * Metoda s návratovým typem int[] porovná směr, ve kterém posíláme postavičku s dostupnýmy směry, až na stop (v něm není žádná interakce).
+     * Dle shody směrů přičte/odečte k příslušné pozici rychlost.
+     * vrátí pole o dvou prvních pozice[0] x - ová souřadnice pozice[1] y - nová souřadnice.
+     * @return
+     */
     public int[] budouciPozice() {
         int[] pozice = new int[] {x, y};
         switch (smer) {
@@ -53,9 +72,19 @@ abstract public class Postavicka implements Serializable{
         }
         return pozice;
     }
+
+    /**
+     * nastaví směr dle parametru
+     * @param smer
+     */
     public void setSmer(Smery smer){
         this.smer = smer;
     }
+
+    /**
+     * vrací velikost postavičky.
+     * @return
+     */
     public int getVelikost(){
         return velikost;
     }

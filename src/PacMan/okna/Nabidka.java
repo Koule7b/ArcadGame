@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
- * Nabidka je panel, který umožňuje zvojit, jestli hru chci spustit, nebo vypnout
+ * Nabidka je panel, který umožňuje zvojit, jestli hru chci spustit, nebo vypnout, implementuje ActionListener.
  */
 public class Nabidka extends JPanel implements ActionListener {
     private Grafika okno;
@@ -32,7 +32,7 @@ public class Nabidka extends JPanel implements ActionListener {
     }
 
     /**
-     * Vnitřní anonymní třída, která se stará o akce tlačítek, když zmáčku spustit otevře hru, když vypnout zavře okno a vypne se.
+     * Přetížením metody actionPerformed(ActionEvent ae) nastavím funkce tlačítkům.
      * @param ae
      */
     @Override

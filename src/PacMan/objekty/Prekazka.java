@@ -4,7 +4,7 @@ import java.awt.*;
 import java.io.Serializable;
 
 /**
- * Created by Admin on 19.4.2016.
+ * Třída, která implementuje Serializable, kvůli serializaci a ukládání do souboru.
  */
 public class Prekazka implements Serializable{
     private int x;
@@ -13,6 +13,16 @@ public class Prekazka implements Serializable{
     private int vyska;
     private Color barvaVnitrku;
     private Color barvaOkraje;
+
+    /**
+     * V konstruktoru se nastaví souřadnice překážky, velikost, barva vnitřku a okraje dle parametrů.
+     * @param x
+     * @param y
+     * @param sirka
+     * @param vyska
+     * @param barvaVnitrku
+     * @param barvaOkraje
+     */
     public Prekazka(int x, int y, int sirka, int vyska, Color barvaVnitrku, Color barvaOkraje) {
         this.x = x;
         this.y = y;
@@ -21,10 +31,19 @@ public class Prekazka implements Serializable{
         this.barvaVnitrku = barvaVnitrku;
         this.barvaOkraje = barvaOkraje;
     }
+
+    /**
+     * Metoda vrací rovnoběžník o souřadnicích a velikostech překážky.
+     * @return
+     */
     public Rectangle getOkraje() {
         return new Rectangle(x, y, sirka, vyska);
     }
 
+    /**
+     * Metoda má na starosti vykreslení překážky.
+     * @param g
+     */
     public void vykresliSe(Graphics g){
         g.setColor(barvaVnitrku);
         g.fillRect(x, y, sirka, vyska);
