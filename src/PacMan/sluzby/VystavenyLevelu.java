@@ -43,8 +43,8 @@ public class VystavenyLevelu {
             in.close();
             fileIn.close();
         } catch (FileNotFoundException e) {
-            // file not found, creating new board
-            System.out.println("board: new file will be created");
+            //nenalezen soubor, bude vytvořen nový
+            System.out.println("vytvoř nový soubor");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException c) {

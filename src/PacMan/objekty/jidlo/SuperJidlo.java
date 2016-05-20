@@ -1,6 +1,5 @@
 package PacMan.objekty.jidlo;
 
-import PacMan.okna.Hra;
 
 import java.awt.*;
 import java.io.Serializable;

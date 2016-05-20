@@ -44,4 +44,14 @@ public class HracTest {
         int [] pozice = h.budouciPozice();
         assertEquals(16, pozice[1]);
     }
+    @Test
+    public void testSetX(){
+        Hrac h = new Hrac();
+        assertEquals(15, h.setX(15));
+    }
+    @Test
+    public void testSetY(){
+        Hrac h = new Hrac();
+        assertEquals(15, h.setY(15));
+    }
 }

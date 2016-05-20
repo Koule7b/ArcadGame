@@ -68,14 +68,14 @@ public class Engine {
      * @param cisloUrovne
      * @return
      */
-    public boolean nactiUroven(int cisloUrovne) {
+    private boolean nactiUroven(int cisloUrovne) {
 
         aktualni = tvorbaUrovne.nacti(cisloUrovne);
         if(aktualni == null){
             konecHry = true;
             return false;
         }else {
-            pohybovac = new Pohybovac(velikostSirka, velikostVyska, aktualni, zivoty, scorePotvurek, scoreHrace);
+            pohybovac = new Pohybovac(velikostSirka, velikostVyska, aktualni, zivoty, scoreHrace, scorePotvurek);
             uroven++;
             return true;
         }

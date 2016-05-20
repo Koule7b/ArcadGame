@@ -6,9 +6,7 @@ import PacMan.urovne.Uroven;
 
 import java.awt.*;
 
-/**
- * Created by Admin on 17.5.2016.
- */
+
 public class StepanoviUrovne {
     public static void main(String[] args) {
         VystavenyLevelu vystavenyLevelu = new VystavenyLevelu();
