@@ -22,7 +22,6 @@ public class Uroven implements Serializable{
     protected ArrayList<MistaZmenySmeru> mistaZmenySmeru = new ArrayList<>();
     protected ArrayList<SuperJidlo> superJidloo = new ArrayList<>();
     protected ArrayList<Svaca> svaca;
-    protected ArrayList<SiloKoule> silokoule = new ArrayList<>();
 
 
     protected Color barvaVnitrku;
@@ -30,33 +29,67 @@ public class Uroven implements Serializable{
 
     protected Hrac hrac = new Hrac();
 
-    public Uroven(Color barvaVnitrku){
-        this.barvaOkraje = barvaVnitrku;
-        this.barvaVnitrku = barvaVnitrku;
-    }
+    /**
+     * Konstruktor nastaví barvu vnitřku překážek a barvu okrajů překážek dle parametrů.
+     * @param barvaVnitrku
+     * @param barvaOkraje
+     */
 
     public Uroven(Color barvaVnitrku, Color barvaOkraje){
         this.barvaOkraje = barvaOkraje;
         this.barvaVnitrku = barvaVnitrku;
     }
 
+    /**
+     * Metoda přidávající "potvůrku" na pozice dle parametrů a nastaví výchozí směr, dle parametru.
+     * @param x
+     * @param y
+     * @param smer
+     */
     public void addPotvurka(int x, int y, Smery smer){
         Potvurka potvurka = new Potvurka(x, y, smer);
         potvurky.add(potvurka);
     }
 
+    /**
+     * Metada přidávající překažku na pozice a o velikostech dle parametrů.
+     * @param x
+     * @param y
+     * @param sirka
+     * @param vyska
+     */
     public void addPrekazka(int x, int y, int sirka, int vyska){
         Prekazka prekazka = new Prekazka(x, y, sirka, vyska, barvaVnitrku, barvaOkraje);
         prekazky.add(prekazka);
     }
+
+    /**
+     * Metodapřidávající "superJidlo" na určené pozice parametry
+     * @param x
+     * @param y
+     */
     public void addSuperJidlo(int x, int y){
         SuperJidlo superJidlo = new SuperJidlo(x, y);
         superJidloo.add(superJidlo);
     }
+
+    /**
+     * Metada přidávající překažku na pozice a o velikostech dle parametrů.
+     * @param x
+     * @param y
+     * @param sirka
+     * @param vyska
+     */
     public void addMistoZnemySmeru(int x, int y, int sirka, int vyska){
         MistaZmenySmeru mistoZmenySmeru = new MistaZmenySmeru(x, y, sirka, vyska);
         mistaZmenySmeru.add(mistoZmenySmeru);
     }
+
+    /**
+     * Metoda, která vytváří "jídlo", celá síť by obsahovala 160 "porcí" v daných rozestupech, ale překontoluje kolizi s překážkami.
+     * Pokud "jídlo" je za překážkou nelze ho sníst, proto se ani nevystaví.
+     * Na mappě lze vidět jen "jídlo", které skutečně může ovlivnit score.
+     */
     public void vytvoreniJidla() {
         svaca = new ArrayList<>();
         for (int i = 0; i < 160; i++) {
@@ -75,23 +108,48 @@ public class Uroven implements Serializable{
             }
         }
     }
+
+    /**
+     * vrací Místa, kde "potvůrky" mohou změnit směr
+     * @return
+     */
     public ArrayList<MistaZmenySmeru> getMistaZmenySmeru(){
         return mistaZmenySmeru;
     }
 
+    /**
+     * Vrací překážky.
+     * @return
+     */
     public ArrayList<Prekazka> getPrekazky() {
         return prekazky;
     }
 
+    /**
+     * Vrací potvůrky.
+     * @return
+     */
     public ArrayList<Potvurka> getPotvurky() {
         return potvurky;
     }
 
+    /**
+     * Vrací "jídlo" (potravu).
+     * @return
+     */
     public ArrayList<Svaca> getSvaca() {
         return svaca;
     }
-    public ArrayList<SuperJidlo> getSuperJidlo(){return superJidloo;}
-    public ArrayList<SiloKoule> getSilokoule(){return silokoule;}
 
+    /**
+     * Vrací "superJidlo" (stejné, jako jídlo, jen jiná velikost barva a bodové hodnocení).
+     * @return
+     */
+    public ArrayList<SuperJidlo> getSuperJidlo(){return superJidloo;}
+
+    /**
+     * Vrací hráče.
+     * @return
+     */
     public Hrac getHrac() {return hrac;}
 }

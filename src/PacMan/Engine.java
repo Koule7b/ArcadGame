@@ -106,47 +106,92 @@ public class Engine {
     public ArrayList<Potvurka> getPotvurky() {
         return aktualni.getPotvurky();
     }
+    /**
+     * vrací ArrayList "superJidla" je to stejné, jako "sváča", jen je větší, jinak barevné a za víc bodů.
+     * @return
+     */
     public ArrayList<SuperJidlo> getSuperJidlo(){return aktualni.getSuperJidlo();}
-
+    /**
+     * vrací proměnou typu Hrac -> vrací hráče.
+     * @return
+     */
     public Hrac getHrac() {
         return aktualni.getHrac();
     }
 
+    /**
+     * vrací ArrayList "překážek".
+     * @return
+     */
     public ArrayList<Prekazka> getPrekazky() {
         return aktualni.getPrekazky();
     }
-
+    /**
+     * vrací životy hráče.
+     * @return
+     */
     public int getZivotyHrace() {
         return movinator3000.getZivoty();
     }
-
+    /**
+     * vrací boolean jestli může načíst další úroveň (jestli další úroveň existuje, jestli je co načíst).
+     * @return
+     */
     public boolean nactiDalsiUroven(){
         return nactiUroven(uroven);
     }
 
+    /**
+     * vrací boolean, jestli je konec hry.
+     * @return
+     */
     public boolean KonecHry() {
     return konecHry;
     }
+    /**
+     * vrací boolean, jeslti vyhrál "hráč", nebo "potvůrky".
+     * @return
+     */
     public boolean HracVyhral(){return getScoreHrace() > getScorePotvurek();}
 
+    /**
+     * vrací ArrayList "míst změn směru".
+     * @return
+     */
     public ArrayList<MistaZmenySmeru> getMistaZmenySmeru() {
         return aktualni.getMistaZmenySmeru();
     }
 
-
+    /**
+     * nastavuje score hráče pomocí getteru z movinatoru3000.
+     */
     private void setScoreHrace() {
         scoreHrace = movinator3000.getScoreHrace();
     }
 
+    /**
+     * nastavuje score potvůrek pomocí getteru z movinatoru3000.
+     */
     private void setScorePotvurek() {
         scorePotvurek = movinator3000.getScorePotvurek();
     }
+
+    /**
+     * nastavuje životy hráče pomocí getteru z movinatoru3000.
+     */
     private int setZivotyHrace(){return this.zivoty = movinator3000.getZivoty();}
 
+    /**
+     * nastavuje pomocí parametru nový směr hráče.
+     * @param smer
+     */
     public void zmenSmer(Smery smer) {
         aktualni.getHrac().setSmer(smer);
     }
 
+    /**
+     * metoda, která volá metodu ze třídy "Movinator3000" "pohniVsim()" a přenastaví proměné score hráče, score potvůrek, životy hráče voláním příslušcých metod.
+     */
     public void skok() {
         movinator3000.pohniVsim();
         setZivotyHrace();

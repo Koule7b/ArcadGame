@@ -1,25 +1,19 @@
 package PacMan.sluzby;
 
-import PacMan.Engine;
-import PacMan.objekty.postavicky.Smery;
 import PacMan.urovne.Uroven;
 
-import java.awt.*;
 import java.io.*;
-import java.util.ArrayList;
 
 /**
- * Created by Admin on 4.4.2016.
+ * Třída, která má za úkol vystavět levely, zapsat do souboru, poté je i načíst :-)
  */
 public class VystavenyLevelu {
-    private ArrayList<Uroven> sezanam = new ArrayList<>();
-    public int getPocetLevelu(){return sezanam.size();}
 
-    public VystavenyLevelu() {
-    }
-
-
-
+    /**
+     * ukládá úroveň do souboru úroveň pojmenuje dle indexace.
+     * @param i
+     * @param uroven
+     */
     public void ulozeniUrovne(int i, Uroven uroven) {
         try {
             FileOutputStream fileOut = new FileOutputStream("urovne/"+i+".bin");
@@ -33,6 +27,12 @@ public class VystavenyLevelu {
             e.printStackTrace();
         }
     }
+
+    /**
+     * načte úroveň podle parametru.
+     * @param cisloUrovne
+     * @return
+     */
     public Uroven nacti(int cisloUrovne)
     {
         Uroven uroven = null;
@@ -45,8 +45,8 @@ public class VystavenyLevelu {
         } catch (FileNotFoundException e) {
             // file not found, creating new board
             System.out.println("board: new file will be created");
-        } catch (IOException i) {
-            i.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         } catch (ClassNotFoundException c) {
             c.printStackTrace();
         }

@@ -65,7 +65,7 @@ public class StepanoviUrovne {
     }
 
     protected static Uroven vytvorUroven2() {
-        Uroven lvl = new Uroven(Color.YELLOW);
+        Uroven lvl = new Uroven(Color.YELLOW, Color.yellow);
         lvl.addPrekazka(53, 40, 20, 215);
         lvl.addPrekazka(70, 75, 100, 20);
         lvl.addPrekazka(100, 20, 174, 20);
@@ -96,7 +96,7 @@ public class StepanoviUrovne {
     }
 
     protected static Uroven vytvorUroven3() {
-        Uroven lvl = new Uroven(Color.WHITE);
+        Uroven lvl = new Uroven(Color.WHITE, Color.WHITE);
 
         int pd = 12;
         lvl.addPrekazka(0, 0 + pd, 30, 90);
