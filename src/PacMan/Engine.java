@@ -64,7 +64,7 @@ public class Engine {
      * (scoreHrace, scorePotvurek, zivoty, aktualni) všechno to jsou údaje, které se mohou v průběhu hry změnit a nejspíš se i změní.
      * Dále se předává pohybovac i velikost okna, která se sice nemění, ale movinator tyto údaje potřebuje, aby mu postavičky neutíkaly
      * z hrací plochy.
-     * Poté "nactiUroven(cisloUrovne) navýší proměnou úroveň o jednu výš, aby nenačítala pořád dokola stejnou úroveň.
+     * Poté "nactiUroven(cisloUrovne)" navýší proměnou úroveň o jednu výš, aby nenačítala pořád dokola stejnou úroveň.
      * @param cisloUrovne
      * @return
      */
