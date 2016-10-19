@@ -7,5 +7,6 @@ public class Spusteni {
     public static void main(String[] args) {
         Grafika program = new Grafika();
         program.otevriNabidku();
+        System.out.println("bla");
     }
 }
