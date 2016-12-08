@@ -14,5 +14,6 @@ public class Spusteni {
         urovne.vytvoreniUrovni();
         Grafika program = new Grafika();
         program.otevriNabidku();
+        System.out.println("bla");
     }
 }
