@@ -1,4 +1,8 @@
-package PacMan.objekty.mistaZmenySmeru;
+/**
+ * Autor: Štěpán Mudra
+ */
+package SemestralniProjektPacMan.objekty.mistaZmenySmeru;
+
 
 import java.awt.*;
 import java.io.Serializable;

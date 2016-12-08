@@ -1,4 +1,7 @@
-package PacMan.objekty.postavicky;
+/**
+ * Autor: Štěpán Mudra
+ */
+package SemestralniProjektPacMan.objekty.postavicky;
 
 import java.io.Serializable;
 
@@ -17,7 +20,7 @@ abstract public class Postavicka implements Serializable{
     private Smery smer;
 
     //proměná typu int udávanící počet pixelů za 1 skok (obnovení plochy).
-    private int rychlost = 1;
+    private double rychlost = 1;
 
     /**
      * KOnstruktor postavičky nastaví souřadnice a směr dle parametrů.
@@ -95,4 +98,3 @@ abstract public class Postavicka implements Serializable{
         return velikost;
     }
 }
-

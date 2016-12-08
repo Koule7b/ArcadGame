@@ -1,10 +1,12 @@
-package PacMan;
+/**
+ * Autor: Štěpán Mudra
+ */
+package SemestralniProjektPacMan;
 
-import PacMan.okna.Hra;
-import PacMan.okna.Nabidka;
+import SemestralniProjektPacMan.okna.Hra;
+import SemestralniProjektPacMan.okna.Nabidka;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Třída Grafika si vytvoří okno do kterého pomocí metody "otevriNabidku()" promítne nabídku a pomocí "otevriHru()" promítne hru.

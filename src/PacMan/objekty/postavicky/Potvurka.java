@@ -1,4 +1,7 @@
-package PacMan.objekty.postavicky;
+/**
+ * Autor: Štěpán Mudra
+ */
+package SemestralniProjektPacMan.objekty.postavicky;
 
 import java.awt.*;
 

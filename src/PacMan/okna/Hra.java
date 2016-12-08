@@ -1,12 +1,13 @@
-package PacMan.okna;
+package SemestralniProjektPacMan.okna;
 
 
-import PacMan.objekty.Prekazka;
-import PacMan.objekty.jidlo.SuperJidlo;
-import PacMan.objekty.jidlo.Svaca;
-import PacMan.objekty.mistaZmenySmeru.MistaZmenySmeru;
-import PacMan.objekty.postavicky.*;
-import PacMan.Engine;
+import SemestralniProjektPacMan.objekty.Prekazka;
+import SemestralniProjektPacMan.objekty.easterEgg.SkryteChodby;
+import SemestralniProjektPacMan.objekty.jidlo.SuperJidlo;
+import SemestralniProjektPacMan.objekty.jidlo.Svaca;
+import SemestralniProjektPacMan.objekty.mistaZmenySmeru.MistaZmenySmeru;
+import SemestralniProjektPacMan.objekty.postavicky.*;
+import SemestralniProjektPacMan.Engine;
 
 import java.awt.*;
 import java.awt.Graphics;
@@ -17,7 +18,6 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.Timer;
-import javax.swing.ImageIcon;
 
 /**
  * Author: Štěpán Mudra.
@@ -43,7 +43,7 @@ public class Hra extends JPanel {
         int sirka = 300;
         int vyska = 500;
         PoslouchaniCasovace publikum = new PoslouchaniCasovace();
-        casovac = new Timer(10, publikum);
+        casovac = new Timer(7, publikum);
         casovac.start();
         this.setPreferredSize(new Dimension(sirka, vyska));
         this.engine = new Engine(sirka, vyska);
@@ -56,22 +56,28 @@ public class Hra extends JPanel {
                 super.keyPressed(e);
 
                 Smery novySmer = null;
-                switch (e.getKeyCode()){
-                    case KeyEvent.VK_W :
-                    case KeyEvent.VK_UP :
-                        novySmer = Smery.nahoru; break;
+                switch (e.getKeyCode()) {
+                    case KeyEvent.VK_W:
+                    case KeyEvent.VK_UP:
+                        novySmer = Smery.nahoru;
+                        break;
                     case KeyEvent.VK_S:
                     case KeyEvent.VK_DOWN:
-                        novySmer = Smery.dolu; break;
+                        novySmer = Smery.dolu;
+                        break;
                     case KeyEvent.VK_A:
                     case KeyEvent.VK_LEFT:
-                        novySmer = Smery.levo; break;
+                        novySmer = Smery.levo;
+                        break;
                     case KeyEvent.VK_D:
                     case KeyEvent.VK_RIGHT:
-                        novySmer = Smery.pravo; break;
+                        novySmer = Smery.pravo;
+                        break;
                 }
-                if(novySmer != null){
-                    engine.zmenSmer(novySmer);
+                if(!engine.KonecHry() && engine.getZivotyHrace() >= 0) {
+                    if (novySmer != null) {
+                        engine.zmenSmer(novySmer);
+                    }
                 }
             }
         });
@@ -79,6 +85,7 @@ public class Hra extends JPanel {
 
     /**
      * Metoda která má za úkol vykreslit hrací plochu a překreslovat ji.
+     *
      * @param g
      */
     public void paintComponent(Graphics g) {
@@ -86,29 +93,30 @@ public class Hra extends JPanel {
         //Kontroluje jeslti nastal konec hry.
         if (engine.KonecHry()) {
             //pokud ano, tak zkoumá, kdo vyhrál, pokd hráč, tak vykreslí výhru, pokud nevyhrál hráč -> vyhrály potvůrky a vykreslí prohru, v každém případě stopne časovač.
-             if(engine.HracVyhral()) {
-             vypisVyhru(g);
-             casovac.stop();
-             }else{
-             vypsaniProhry(g);
-             casovac.stop();
-             }
-        }else {
+            if (engine.HracVyhral()) {
+                vypisVyhru(g);
+                casovac.stop();
+            } else {
+                vypsaniProhry(g);
+                casovac.stop();
+            }
+        } else {
             pocetZivotu(g);
             vypisScore(g);
             if (engine.getZivotyHrace() <= 0) {
                 vypsaniProhry(g);
                 casovac.stop();
-                return;
-            }
+            } else {
 
-            vykresliPromene(g);
+                vykresliPromene(g);
+            }
         }
 
     }
 
     /**
      * metoda, která vykresluje všechny objekty na hrací ploše.
+     *
      * @param g
      */
     private void vykresliPromene(Graphics g) {
@@ -120,7 +128,7 @@ public class Hra extends JPanel {
         engine.getHrac().vykresliSe(g);
 
         ArrayList<Potvurka> potvurky = engine.getPotvurky();
-        for (int i = 0; i < potvurky.size() ; i++) {
+        for (int i = 0; i < potvurky.size(); i++) {
             potvurky.get(i).vykresliSe(g);
         }
         ArrayList<Prekazka> prekazkay = engine.getPrekazky();
@@ -132,27 +140,37 @@ public class Hra extends JPanel {
             superJidlo.get(i).vykresleniSuperJidla(g);
         }
         /**
+        ArrayList<SkryteChodby> skryteChodby = engine.getSkryteChodby();
+        for (int i = 0; i < skryteChodby.size(); i++) {
+            skryteChodby.get(i).vykresliSe(g);
+        }
+         */
+        /**
          * tato čáat je zakomentovaná, protože finální uživatel vidět místa, kde "potvůrky" mohou změnit směr nemá,
          * je zde jen a pouze jako pomůcka, když jsem přidával místa pro změnu směru.
-        ArrayList<MistaZmenySmeru> mistaZmenySmeru = engine.getMistaZmenySmeru();
-        for (int i = 0; i < mistaZmenySmeru.size() ; i++) {
-            mistaZmenySmeru.get(i).vykresliSe(g);
-        }
+         * */
+        /**
+         ArrayList<MistaZmenySmeru> mistaZmenySmeru = engine.getMistaZmenySmeru();
+         for (int i = 0; i < mistaZmenySmeru.size() ; i++) {
+         mistaZmenySmeru.get(i).vykresliSe(g);
+         }
          */
     }
 
     /**
      * metoda vypisujici score
+     *
      * @param g
      */
     private void vypisScore(Graphics g) {
         g.setColor(Color.YELLOW);
-        g.drawString("Score Hrace: "+String.valueOf(engine.getScoreHrace()), 200, 15);
-        g.drawString("Score Potvurek: "+String.valueOf(engine.getScorePotvurek()), 15, 15);
+        g.drawString("Score Hrace: " + String.valueOf(engine.getScoreHrace()), 200, 15);
+        g.drawString("Score Potvurek: " + String.valueOf(engine.getScorePotvurek()), 5, 15);
     }
 
     /**
      * metoda vykreslujici vyhru
+     *
      * @param g
      */
     private void vypisVyhru(Graphics g) {
@@ -163,6 +181,7 @@ public class Hra extends JPanel {
 
     /**
      * metoda vykreslujici prohru
+     *
      * @param g
      */
     private void vypsaniProhry(Graphics g) {
@@ -172,6 +191,7 @@ public class Hra extends JPanel {
 
     /**
      * metoda vypisujici pocet zivotu
+     *
      * @param g
      */
     private void pocetZivotu(Graphics g) {
@@ -186,8 +206,11 @@ public class Hra extends JPanel {
     private class PoslouchaniCasovace implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            if(engine.getPohybovac().KontrolaVchodu(engine.getHrac())){
+                engine.nactiSkrytouUroven();
+            }
             engine.skok();
-            if(engine.konecLevelu()){
+            if (engine.konecLevelu()) {
                 engine.nactiDalsiUroven();
             }
             repaint();

@@ -1,4 +1,7 @@
-package PacMan.objekty;
+/**
+ * Autor: Štěpán Mudra
+ */
+package SemestralniProjektPacMan.objekty;
 
 import java.awt.*;
 import java.io.Serializable;

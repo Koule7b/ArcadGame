@@ -1,15 +1,19 @@
-package PacMan;
+/**
+ * Autor: Štěpán Mudra
+ */
+package SemestralniProjektPacMan;
 
-import PacMan.objekty.Prekazka;
-import PacMan.objekty.jidlo.SuperJidlo;
-import PacMan.objekty.jidlo.Svaca;
-import PacMan.objekty.mistaZmenySmeru.MistaZmenySmeru;
-import PacMan.objekty.postavicky.Hrac;
-import PacMan.objekty.postavicky.Potvurka;
-import PacMan.objekty.postavicky.Smery;
-import PacMan.sluzby.Pohybovac;
-import PacMan.sluzby.VystavenyLevelu;
-import PacMan.urovne.Uroven;
+import SemestralniProjektPacMan.objekty.Prekazka;
+import SemestralniProjektPacMan.objekty.easterEgg.SkryteChodby;
+import SemestralniProjektPacMan.objekty.jidlo.SuperJidlo;
+import SemestralniProjektPacMan.objekty.jidlo.Svaca;
+import SemestralniProjektPacMan.objekty.mistaZmenySmeru.MistaZmenySmeru;
+import SemestralniProjektPacMan.objekty.postavicky.Hrac;
+import SemestralniProjektPacMan.objekty.postavicky.Potvurka;
+import SemestralniProjektPacMan.objekty.postavicky.Smery;
+import SemestralniProjektPacMan.sluzby.Pohybovac;
+import SemestralniProjektPacMan.sluzby.VystaveniLevelu;
+import SemestralniProjektPacMan.urovne.Uroven;
 
 import java.util.ArrayList;
 
@@ -25,6 +29,9 @@ public class Engine {
     private int scorePotvurek = 0;
     //aktuální úroveň
     private Uroven aktualni;
+
+    private Uroven aktualniSkryta;
+
     private Pohybovac pohybovac;
     //velikost panelu (šířka)
     private int velikostSirka;
@@ -33,8 +40,10 @@ public class Engine {
     //proměná, jestli je konec hry
     private boolean konecHry = false;
 
-    private VystavenyLevelu tvorbaUrovne = new VystavenyLevelu();
+    private VystaveniLevelu tvorbaUrovne = new VystaveniLevelu();
     private int uroven = 0;
+
+    private int urovenSkryta = 0;
 
     /**
      *Nastaví šířku a výšku panelu, načte úroveň 0 (indexace úrovní od 0).
@@ -45,6 +54,9 @@ public class Engine {
         this.velikostSirka = velikostSirka;
         this.velikostVyska = velikostVyska;
         nactiUroven(uroven);
+    }
+    public boolean nactiSkrytouUroven(){
+        return nactiSkrytou(urovenSkryta);
     }
 
     /**
@@ -80,6 +92,19 @@ public class Engine {
             return true;
         }
     }
+
+    private boolean nactiSkrytou(int cisloSkrytyUrovne){
+        //tvorbaUrovne.ulozeniUrovne(uroven, );
+        aktualni = tvorbaUrovne.nactiSchovanouUro(cisloSkrytyUrovne);
+        if(aktualni != null){
+            pohybovac = new Pohybovac(velikostSirka, velikostVyska, aktualni, zivoty, scoreHrace, scorePotvurek);
+            this.urovenSkryta++;
+            return true;
+        }else {
+            return false;
+        }
+    }
+
 
     /**
      * vrací score hráče.
@@ -125,6 +150,10 @@ public class Engine {
         return aktualni.getHrac();
     }
 
+    public Pohybovac getPohybovac() {
+        return pohybovac;
+    }
+
     /**
      * vrací ArrayList "překážek".
      * @return
@@ -152,7 +181,7 @@ public class Engine {
      * @return
      */
     public boolean KonecHry() {
-    return konecHry;
+        return konecHry;
     }
     /**
      * vrací boolean, jeslti vyhrál "hráč", nebo "potvůrky".
@@ -167,6 +196,8 @@ public class Engine {
     public ArrayList<MistaZmenySmeru> getMistaZmenySmeru() {
         return aktualni.getMistaZmenySmeru();
     }
+
+    public ArrayList<SkryteChodby> getSkryteChodby(){return aktualni.getSkryteChodby();}
 
     /**
      * nastavuje score hráče pomocí getteru z movinatoru3000.
@@ -205,4 +236,3 @@ public class Engine {
         setScoreHrace();
     }
 }
-

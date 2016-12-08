@@ -1,9 +1,14 @@
-package PacMan.sluzby;
+/**
+ * Autor: Štěpán Mudra
+ */
+package SemestralniProjektPacMan.sluzby;
 
-import PacMan.objekty.postavicky.Postavicka;
-import PacMan.objekty.postavicky.Potvurka;
-import PacMan.objekty.postavicky.Smery;
-import PacMan.urovne.Uroven;
+//import SemestralniProjektPacMan.objekty.postavicky.Hrac;
+import SemestralniProjektPacMan.objekty.postavicky.Hrac;
+import SemestralniProjektPacMan.objekty.postavicky.Postavicka;
+import SemestralniProjektPacMan.objekty.postavicky.Potvurka;
+import SemestralniProjektPacMan.objekty.postavicky.Smery;
+import SemestralniProjektPacMan.urovne.Uroven;
 
 import java.awt.*;
 import java.util.Random;
@@ -53,8 +58,8 @@ public class Pohybovac {
      * @param potvurka
      */
     public void nahodnySmer(Potvurka potvurka) {
-        int nahoda = generator.nextInt(1900) + 1;
-        if (nahoda % (generator.nextInt(500) + 1) == 0) {
+        int nahoda = generator.nextInt(97) + 1;
+        if (nahoda % (79) == 0) {
             Smery[] smer = Smery.values();
             potvurka.setSmer(smer[generator.nextInt(Smery.values().length - 1)]);
         }
@@ -70,30 +75,36 @@ public class Pohybovac {
      * Pokud jsou s tímto místem v kolizi zavolá se metoda nahodnySmer().
      */
     public void pohniVsim() {
-        if (kontrolaKolizeProZastaveni(uroven.getHrac())) {
-            uroven.getHrac().pohyb();
-            int[] budouci = uroven.getHrac().budouciPozice();
-            if (kontrolaSnedeniJidla(budouci[0], budouci[1], uroven.getHrac())) {
-                scoreHrace++;
-            }
-            /**
-            Nekontroluje kolizi hráče s potvůrkou, když hráč stojí.
-            Povoluje chety, když hráč stojí nenii sněden.
-            ;-)
-             */
-            if (kontrolaKolizeSPotvurkama(budouci[0], budouci[1], uroven.getHrac())) {
+        int[] budouci = uroven.getHrac().budouciPozice();
+        if (!kontrolaKolizesOkrajemaHry(budouci[0], budouci[1], uroven.getHrac())) {
+            if (!kontrolaKolizeSPrekazkama(budouci[0], budouci[1], uroven.getHrac()) || kontrolaSchodeb(budouci[0], budouci[1], uroven.getHrac())) {
+                uroven.getHrac().Prebarveni(Color.LIGHT_GRAY);
+                uroven.getHrac().pohyb();
+                if (kontrolaSnedeniJidla(budouci[0], budouci[1], uroven.getHrac())) {
+                    scoreHrace++;
+                }
+                /**
+                 Nekontroluje kolizi hráče s potvůrkou, když hráč stojí.
+                 Povoluje cheaty, když hráč stojí nenii sněden.
+                 ;-)
+                 */
+                if (kontrolaKolizeSPotvurkama(budouci[0], budouci[1], uroven.getHrac())) {
 
-                zivoty--;
-                uroven.getHrac().setX(125);
-                uroven.getHrac().setY(230);
-                scorePotvurek = scorePotvurek + 30;
-            }
-            if (kontrolaKolizeSuperJidla(budouci[0], budouci[1], uroven.getHrac())) {
-                scoreHrace = scoreHrace + 30;
-            }
+                    zivoty--;
+                    uroven.getHrac().setX(125);
+                    uroven.getHrac().setY(230);
+                    scorePotvurek = scorePotvurek + 30;
+                }
+                if (kontrolaKolizeSuperJidla(budouci[0], budouci[1], uroven.getHrac())) {
+                    scoreHrace = scoreHrace + 30;
+                }
 
+            }else{
+                uroven.getHrac().Prebarveni(Color.DARK_GRAY);
+            }
+        }else{
+            uroven.getHrac().Prebarveni(Color.DARK_GRAY);
         }
-
 
         for (int i = 0; i < uroven.getPotvurky().size(); i++) {
             Potvurka potvurka = uroven.getPotvurky().get(i);
@@ -104,17 +115,26 @@ public class Pohybovac {
 
                 potvurka.setSmer(smer[generator.nextInt(Smery.values().length - 1)]);
             }
-            int[] budouci = uroven.getPotvurky().get(i).budouciPozice();
-            if (kontrolaKolizesMistem(budouci[0], budouci[1], uroven.getPotvurky().get(i))) {
-                nahodnySmer(potvurka);
+            int[] budouciPotvurek = uroven.getPotvurky().get(i).budouciPozice();
+            if (kontrolaKolizesMistem(budouciPotvurek[0], budouciPotvurek[1], uroven.getPotvurky().get(i))) {
+                nahodnySmer(uroven.getPotvurky().get(i));
             }
-            if (kontrolaSnedeniJidla(budouci[0] - 1, budouci[1] - 1, uroven.getPotvurky().get(i))) {
+            if (kontrolaSnedeniJidla(budouciPotvurek[0] - 1, budouciPotvurek[1] - 1, uroven.getPotvurky().get(i))) {
                 scorePotvurek++;
             }
-            if (kontrolaKolizeSuperJidla(budouci[0], budouci[1], uroven.getPotvurky().get(i))) {
+            if (kontrolaKolizeSuperJidla(budouciPotvurek[0], budouciPotvurek[1], uroven.getPotvurky().get(i))) {
                 scorePotvurek = scorePotvurek + 30;
             }
         }
+    }
+    public boolean KontrolaVchodu(Hrac hrac){
+        int[] budouci = uroven.getHrac().budouciPozice();
+        for (int i = 0; i < uroven.getSkrytyVchod().size(); i++) {
+            if (new Rectangle(budouci[0], budouci[1], uroven.getHrac().getVelikost(), uroven.getHrac().getVelikost()).intersects(uroven.getSkrytyVchod().get(i).getOkraje())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -136,11 +156,11 @@ public class Pohybovac {
      * @param postavicka
      * @return
      */
-    private boolean kontrolaKolizesMistem(int x, int y, Postavicka postavicka) {
+    private boolean kontrolaKolizesMistem(int x, int y, Potvurka postavicka) {
         for (int i = 0; i < uroven.getMistaZmenySmeru().size(); i++) {
-            if (new Rectangle(x - 1, y - 1, postavicka.getVelikost() + 2, postavicka.getVelikost() + 2).intersects(uroven.getMistaZmenySmeru().get(i).getOkraje()))
-                ;
-            return true;
+            if (new Rectangle(x - 1, y - 1, postavicka.getVelikost() + 2, postavicka.getVelikost() + 2).intersects(uroven.getMistaZmenySmeru().get(i).getOkraje())) {
+                return true;
+            }
         }
         return false;
 
@@ -208,6 +228,15 @@ public class Pohybovac {
     private boolean kontrolaKolizeSPrekazkama(int x, int y, Postavicka postavicka) {
         for (int i = 0; i < uroven.getPrekazky().size(); i++) {
             if (new Rectangle(x - 1, y - 1, postavicka.getVelikost() + 2, postavicka.getVelikost() + 2).intersects(uroven.getPrekazky().get(i).getOkraje())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean kontrolaSchodeb(int x, int y, Postavicka hrac){
+        for (int i = 0; i < uroven.getSkryteChodby().size(); i++) {
+            if(new Rectangle(x - 1, y - 1, hrac.getVelikost() + 2, hrac.getVelikost() + 2).intersects((uroven.getSkryteChodby().get(i).getOkraje()))){
                 return true;
             }
         }

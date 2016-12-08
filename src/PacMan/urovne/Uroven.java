@@ -1,20 +1,22 @@
-package PacMan.urovne;
+/**
+ * Autor: Štěpán Mudra
+ */
+package SemestralniProjektPacMan.urovne;
 
-import PacMan.objekty.Prekazka;
-import PacMan.objekty.jidlo.SuperJidlo;
-import PacMan.objekty.jidlo.Svaca;
-import PacMan.objekty.mistaZmenySmeru.MistaZmenySmeru;
-import PacMan.objekty.postavicky.Hrac;
-import PacMan.objekty.postavicky.Potvurka;
-import PacMan.objekty.postavicky.Smery;
+import SemestralniProjektPacMan.objekty.Prekazka;
+import SemestralniProjektPacMan.objekty.easterEgg.SkryteChodby;
+import SemestralniProjektPacMan.objekty.easterEgg.SkrytyVchod;
+import SemestralniProjektPacMan.objekty.jidlo.SuperJidlo;
+import SemestralniProjektPacMan.objekty.jidlo.Svaca;
+import SemestralniProjektPacMan.objekty.mistaZmenySmeru.MistaZmenySmeru;
+import SemestralniProjektPacMan.objekty.postavicky.Hrac;
+import SemestralniProjektPacMan.objekty.postavicky.Potvurka;
+import SemestralniProjektPacMan.objekty.postavicky.Smery;
 
 import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * Created by Admin on 19.4.2016.
- */
 public class Uroven implements Serializable{
     /**
      * Proměné znázorňují ArrayListy, daného typu.
@@ -24,6 +26,8 @@ public class Uroven implements Serializable{
     private ArrayList<MistaZmenySmeru> mistaZmenySmeru = new ArrayList<>();
     private ArrayList<SuperJidlo> superJidloo = new ArrayList<>();
     private ArrayList<Svaca> svaca;
+    private ArrayList<SkryteChodby> skryteChodby = new ArrayList<>();
+    private ArrayList<SkrytyVchod> skrytyVchodd = new ArrayList<>();
 
     // barvy, které určují okraje a vnitřek.
     private Color barvaVnitrku;
@@ -56,10 +60,10 @@ public class Uroven implements Serializable{
 
     /**
      * Metada přidávající překažku na pozice a o velikostech dle parametrů.
-     * @param x
-     * @param y
-     * @param sirka
-     * @param vyska
+     * @param x x - ová souřadnice
+     * @param y y - ová souřadnice
+     * @param sirka šířka
+     * @param vyska výška
      */
     public void addPrekazka(int x, int y, int sirka, int vyska){
         Prekazka prekazka = new Prekazka(x, y, sirka, vyska, barvaVnitrku, barvaOkraje);
@@ -77,7 +81,7 @@ public class Uroven implements Serializable{
     }
 
     /**
-     * Metada přidávající překažku na pozice a o velikostech dle parametrů.
+     * Metoda přidávající překažku na pozice a o velikostech dle parametrů.
      * @param x
      * @param y
      * @param sirka
@@ -86,6 +90,15 @@ public class Uroven implements Serializable{
     public void addMistoZnemySmeru(int x, int y, int sirka, int vyska){
         MistaZmenySmeru mistoZmenySmeru = new MistaZmenySmeru(x, y, sirka, vyska);
         mistaZmenySmeru.add(mistoZmenySmeru);
+    }
+    public void addSkrytyVchod(int x, int y, int velikost){
+        SkrytyVchod skrytyVchod = new SkrytyVchod(x, y, velikost);
+            skrytyVchodd.add(skrytyVchod);
+    }
+
+    public void addSkryteChodby(int x, int y, int sirka, int vyska){
+        SkryteChodby skrytaChodba = new SkryteChodby(x, y, sirka, vyska);
+        skryteChodby.add(skrytaChodba);
     }
 
     /**
@@ -150,9 +163,19 @@ public class Uroven implements Serializable{
      */
     public ArrayList<SuperJidlo> getSuperJidlo(){return superJidloo;}
 
+    public ArrayList<SkrytyVchod> getSkrytyVchod() {return skrytyVchodd;}
+
     /**
      * Vrací hráče.
      * @return
      */
     public Hrac getHrac() {return hrac;}
+
+    public ArrayList<SkryteChodby> getSkryteChodby(){return skryteChodby;}
+    public Color getBarvaVnitrku(){
+        return barvaVnitrku;
+    }
+    public Color getBarvaOkraje(){
+        return barvaOkraje;
+    }
 }
