@@ -1,9 +1,9 @@
 /**
  * Autor: Štěpán Mudra
  */
-package SemestralniProjektPacMan.sluzby;
+package PacMan.sluzby;
 
-import SemestralniProjektPacMan.urovne.Uroven;
+import PacMan.urovne.Uroven;
 
 import java.io.*;
 

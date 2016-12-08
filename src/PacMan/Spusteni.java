@@ -1,7 +1,7 @@
 /**
  * Autor: Štěpán Mudra
  */
-package SemestralniProjektPacMan;
+package PacMan;
 
 import VytvoreniUrovni.StepanoviUrovne;
 
@@ -14,6 +14,6 @@ public class Spusteni {
         urovne.vytvoreniUrovni();
         Grafika program = new Grafika();
         program.otevriNabidku();
-        System.out.println("bla");
+        //System.out.println("bla");
     }
 }

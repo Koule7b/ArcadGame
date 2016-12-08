@@ -1,13 +1,11 @@
-package SemestralniProjektPacMan.okna;
+package PacMan.okna;
 
 
-import SemestralniProjektPacMan.objekty.Prekazka;
-import SemestralniProjektPacMan.objekty.easterEgg.SkryteChodby;
-import SemestralniProjektPacMan.objekty.jidlo.SuperJidlo;
-import SemestralniProjektPacMan.objekty.jidlo.Svaca;
-import SemestralniProjektPacMan.objekty.mistaZmenySmeru.MistaZmenySmeru;
-import SemestralniProjektPacMan.objekty.postavicky.*;
-import SemestralniProjektPacMan.Engine;
+import PacMan.objekty.Prekazka;
+import PacMan.objekty.jidlo.SuperJidlo;
+import PacMan.objekty.jidlo.Svaca;
+import PacMan.objekty.postavicky.*;
+import PacMan.Engine;
 
 import java.awt.*;
 import java.awt.Graphics;

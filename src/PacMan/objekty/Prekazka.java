@@ -1,7 +1,7 @@
 /**
  * Autor: Štěpán Mudra
  */
-package SemestralniProjektPacMan.objekty;
+package PacMan.objekty;
 
 import java.awt.*;
 import java.io.Serializable;

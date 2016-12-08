@@ -1,17 +1,17 @@
 /**
  * Autor: Štěpán Mudra
  */
-package SemestralniProjektPacMan.urovne;
+package PacMan.urovne;
 
-import SemestralniProjektPacMan.objekty.Prekazka;
-import SemestralniProjektPacMan.objekty.easterEgg.SkryteChodby;
-import SemestralniProjektPacMan.objekty.easterEgg.SkrytyVchod;
-import SemestralniProjektPacMan.objekty.jidlo.SuperJidlo;
-import SemestralniProjektPacMan.objekty.jidlo.Svaca;
-import SemestralniProjektPacMan.objekty.mistaZmenySmeru.MistaZmenySmeru;
-import SemestralniProjektPacMan.objekty.postavicky.Hrac;
-import SemestralniProjektPacMan.objekty.postavicky.Potvurka;
-import SemestralniProjektPacMan.objekty.postavicky.Smery;
+import PacMan.objekty.Prekazka;
+import PacMan.objekty.easterEgg.SkryteChodby;
+import PacMan.objekty.easterEgg.SkrytyVchod;
+import PacMan.objekty.jidlo.SuperJidlo;
+import PacMan.objekty.jidlo.Svaca;
+import PacMan.objekty.mistaZmenySmeru.MistaZmenySmeru;
+import PacMan.objekty.postavicky.Hrac;
+import PacMan.objekty.postavicky.Potvurka;
+import PacMan.objekty.postavicky.Smery;
 
 import java.awt.*;
 import java.io.Serializable;

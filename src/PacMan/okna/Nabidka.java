@@ -1,9 +1,9 @@
 /**
  * Autor: Štěpán Mudra
  */
-package SemestralniProjektPacMan.okna;
+package PacMan.okna;
 
-import SemestralniProjektPacMan.Grafika;
+import PacMan.Grafika;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

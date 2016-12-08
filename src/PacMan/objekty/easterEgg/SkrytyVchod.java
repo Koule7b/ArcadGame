@@ -1,4 +1,4 @@
-package SemestralniProjektPacMan.objekty.easterEgg;
+package PacMan.objekty.easterEgg;
 
 import java.awt.*;
 import java.io.Serializable;

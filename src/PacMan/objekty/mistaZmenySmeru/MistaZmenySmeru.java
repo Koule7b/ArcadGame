@@ -1,7 +1,7 @@
 /**
  * Autor: Štěpán Mudra
  */
-package SemestralniProjektPacMan.objekty.mistaZmenySmeru;
+package PacMan.objekty.mistaZmenySmeru;
 
 
 import java.awt.*;

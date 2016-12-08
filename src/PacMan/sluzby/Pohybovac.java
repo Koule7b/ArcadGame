@@ -1,14 +1,14 @@
 /**
  * Autor: Štěpán Mudra
  */
-package SemestralniProjektPacMan.sluzby;
+package PacMan.sluzby;
 
-//import SemestralniProjektPacMan.objekty.postavicky.Hrac;
-import SemestralniProjektPacMan.objekty.postavicky.Hrac;
-import SemestralniProjektPacMan.objekty.postavicky.Postavicka;
-import SemestralniProjektPacMan.objekty.postavicky.Potvurka;
-import SemestralniProjektPacMan.objekty.postavicky.Smery;
-import SemestralniProjektPacMan.urovne.Uroven;
+//import PacMan.objekty.postavicky.Hrac;
+import PacMan.objekty.postavicky.Hrac;
+import PacMan.objekty.postavicky.Postavicka;
+import PacMan.objekty.postavicky.Potvurka;
+import PacMan.objekty.postavicky.Smery;
+import PacMan.urovne.Uroven;
 
 import java.awt.*;
 import java.util.Random;

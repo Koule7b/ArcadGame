@@ -1,7 +1,7 @@
 /**
  * Autor: Štěpán Mudra
  */
-package SemestralniProjektPacMan.objekty.postavicky;
+package PacMan.objekty.postavicky;
 
 /**
  * Třída enum, kde jsou napsány dovolené směry.

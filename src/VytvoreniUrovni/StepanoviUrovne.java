@@ -3,19 +3,11 @@
  */
 package VytvoreniUrovni;
 
-import SemestralniProjektPacMan.objekty.Prekazka;
-import SemestralniProjektPacMan.objekty.easterEgg.SkryteChodby;
-import SemestralniProjektPacMan.objekty.easterEgg.SkrytyVchod;
-import SemestralniProjektPacMan.objekty.jidlo.SuperJidlo;
-import SemestralniProjektPacMan.objekty.jidlo.Svaca;
-import SemestralniProjektPacMan.objekty.mistaZmenySmeru.MistaZmenySmeru;
-import SemestralniProjektPacMan.objekty.postavicky.Potvurka;
-import SemestralniProjektPacMan.objekty.postavicky.Smery;
-import SemestralniProjektPacMan.sluzby.VystaveniLevelu;
-import SemestralniProjektPacMan.urovne.Uroven;
+import PacMan.objekty.postavicky.Smery;
+import PacMan.sluzby.VystaveniLevelu;
+import PacMan.urovne.Uroven;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 
 public class StepanoviUrovne {

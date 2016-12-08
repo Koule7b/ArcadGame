@@ -1,10 +1,10 @@
 /**
  * Autor: Štěpán Mudra
  */
-package SemestralniProjektPacMan;
+package PacMan;
 
-import SemestralniProjektPacMan.okna.Hra;
-import SemestralniProjektPacMan.okna.Nabidka;
+import PacMan.okna.Hra;
+import PacMan.okna.Nabidka;
 
 import javax.swing.*;
 

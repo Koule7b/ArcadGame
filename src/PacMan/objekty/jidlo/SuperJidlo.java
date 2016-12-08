@@ -1,7 +1,7 @@
 /**
  * Autor: Štěpán Mudra
  */
-package SemestralniProjektPacMan.objekty.jidlo;
+package PacMan.objekty.jidlo;
 
 
 import java.awt.*;

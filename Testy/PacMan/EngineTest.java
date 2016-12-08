@@ -1,6 +1,5 @@
 package PacMan;
 
-import PacMan.objekty.postavicky.Smery;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
